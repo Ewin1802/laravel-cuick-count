@@ -7,6 +7,7 @@
             <a href="index.html">Qc</a>
         </div>
         <ul class="sidebar-menu">
+
             <li class="menu-header">Dashboard</li>
             <li class="nav-item dropdown">
                 <a href="#"
@@ -19,6 +20,17 @@
                     <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
                         <a class="nav-link"
                             href="{{ url('dashboard-ecommerce-dashboard') }}">Ecommerce Dashboard</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a href="#"
+                    class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Users</span></a>
+                <ul class="dropdown-menu">
+                    <li >
+                        <a class="nav-link"
+                            href="{{ route('user.index') }}">All User</a>
                     </li>
                 </ul>
             </li>
