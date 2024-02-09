@@ -138,7 +138,7 @@
                                         alt="avatar">
                                     <div class="media-body">
                                         <div class="text-primary float-right">Now</div>
-                                        <div class="media-title">Farhan A Mujib</div>
+                                        <div class="media-title">Ewin Lantapa</div>
                                         <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla.
                                             Nulla vel metus scelerisque ante sollicitudin.</span>
                                     </div>
@@ -150,7 +150,7 @@
                                         alt="avatar">
                                     <div class="media-body">
                                         <div class="float-right">12m</div>
-                                        <div class="media-title">Ujang Maman</div>
+                                        <div class="media-title">Vivie Latamu</div>
                                         <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla.
                                             Nulla vel metus scelerisque ante sollicitudin.</span>
                                     </div>
@@ -162,7 +162,7 @@
                                         alt="avatar">
                                     <div class="media-body">
                                         <div class="float-right">17m</div>
-                                        <div class="media-title">Rizal Fakhri</div>
+                                        <div class="media-title">Zhafran Lantapa</div>
                                         <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla.
                                             Nulla vel metus scelerisque ante sollicitudin.</span>
                                     </div>
@@ -174,7 +174,7 @@
                                         alt="avatar">
                                     <div class="media-body">
                                         <div class="float-right">21m</div>
-                                        <div class="media-title">Alfa Zulkarnain</div>
+                                        <div class="media-title">Sementara Usaha</div>
                                         <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla.
                                             Nulla vel metus scelerisque ante sollicitudin.</span>
                                     </div>

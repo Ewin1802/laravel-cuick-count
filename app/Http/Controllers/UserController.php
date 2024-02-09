@@ -21,7 +21,7 @@ class UserController extends Controller
             })
             ->orderBy('id', 'desc')
             ->paginate(10);
-        return view('pages.users.index', compact ('users'));
+        return view('pages.users.index', compact ('users'), );
     }
 
     public function create()

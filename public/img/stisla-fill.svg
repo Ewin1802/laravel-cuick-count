@@ -1,1 +1,13 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><style>.cls-1{fill:white;}.cls-2{fill:#6777ef;stroke:none;stroke-miterlimit:10;stroke-width:30px;}</style></defs><title>stisla-fill</title><circle class="cls-1" cx="500" cy="500" r="500"/><path class="cls-2" d="M486.5,564.21S375.28,468.5,356,439.14s-29-58.64-29-87.86q0-63.25,48.22-108.53t119-45.27a187.77,187.77,0,0,1,86.73,21.08c20,10.24,86.71,72.12,133.84,119.36a56.16,56.16,0,0,1-2.55,81.8h0a56.15,56.15,0,0,1-77.28-2.85c-46.88-47.82-119-108.59-142.5-108.59q-22.79,0-37.28,12.2T440.67,348q0,15.3,10.35,28.95c9.39,12.13,84.91,80.28,84.91,80.28s88.79,74.3,108.12,103.66,29,58.64,29,87.86q0,63.25-48.22,108.53t-119,45.27a187.77,187.77,0,0,1-86.73-21.08c-20-10.24-86.71-72.12-133.84-119.36a56.16,56.16,0,0,1,2.55-81.8h0a56.15,56.15,0,0,1,77.28,2.85C411.94,631,484,691.72,507.56,691.72q22.79,0,37.28-12.2T559.33,652q0-15.3-10.35-28.95C539.59,611,486.5,564.21,486.5,564.21Z"/></svg>
+<?xml version="1.0"?>
+<svg width="1000" height="1000" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" data-name="Layer 1">
+ <defs>
+  <style>.cls-1{fill:white;}.cls-2{fill:#072401;stroke:none;stroke-miterlimit:10;stroke-width:30px;}</style>
+ </defs>
+ <title>stisla-fill</title>
+ <g class="layer">
+  <title>Layer 1</title>
+  <circle class="cls-1" cx="500" cy="502" id="svg_1" r="500"/>
+  <text fill="#000000" font-family="Fantasy" font-size="24" id="svg_3" stroke-width="0" text-anchor="middle" transform="matrix(1 0 0 1 0 0) matrix(34.7603 0 0 31.4547 -9820.54 -13524)" x="296.43" xml:space="preserve" y="448.3">e</text>
+  <text fill="#000000" font-family="Fantasy" font-size="24" id="svg_4" stroke-width="0" text-anchor="middle" transform="matrix(1 0 0 1 0 0) matrix(13.3032 0 0 11.1315 -4723.35 -7280.23)" x="392.21" xml:space="preserve" y="723.87">count</text>
+ </g>
+</svg>

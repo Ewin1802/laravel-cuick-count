@@ -67,7 +67,7 @@
                         Headphone Blitz
                     </a>
                 </div>
-                <div class="search-header">
+                <div class="search-header"> 
                     Projects
                 </div>
                 <div class="search-item">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Users')
+@section('title', 'Partai')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -12,15 +12,15 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Pengguna</h1>
+                <h1>Partai</h1>
                 <div class="section-header-button">
-                    <a href="{{ route('user.create') }}"
-                        class="btn btn-primary">Tambah Pengguna</a>
+                    <a href="{{ route('partai.create') }}"
+                        class="btn btn-primary">Add New</a>
                 </div>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Pengguna</a></div>
-                    <div class="breadcrumb-item">Semua Pengguna</div>
+                    <div class="breadcrumb-item"><a href="#">Partai</a></div>
+                    <div class="breadcrumb-item">Daftar Partai</div>
                 </div>
             </div>
             <div class="section-body">
@@ -29,9 +29,9 @@
                         @include('layouts.alert')
                     </div>
                 </div>
-                <h2 class="section-title">Petunjuk</h2>
+                <h2 class="section-title">Partai</h2>
                 <p class="section-lead">
-                    Anda dapat mengelola semua pengguna, seperti mengedit, menghapus, dan lainnya.
+                    Anda dapat mengelola Data Partai, seperti mengedit, menghapus, dan lainnya.
                 </p>
 
 
@@ -39,23 +39,23 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Semua Data Pengguna</h4>
+                                <h4>Data Partai</h4>
                             </div>
                             <div class="card-body">
-                                {{-- <div class="float-left">
+                                <div class="float-left">
                                     <select class="form-control selectric">
                                         <option>Action For Selected</option>
                                         <option>Move to Draft</option>
                                         <option>Move to Pending</option>
                                         <option>Delete Pemanently</option>
                                     </select>
-                                </div> --}}
+                                </div>
                                 <div class="float-right">
-                                    <form method="GET" action="{{route('user.index')}}">
+                                    <form method="GET" action="{{route('partai.index')}}">
                                         <div class="input-group">
                                             <input type="text"
                                                 class="form-control"
-                                                placeholder="Cari Nama Pengguna" name="name">
+                                                placeholder="Search" name="nm_partai">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
@@ -68,36 +68,32 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
-
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Created At</th>
+                                            <th>id</th>
+                                            <th>Partai</th>
+                                            <th>No Urut Partai</th>
                                             <th>Action</th>
                                         </tr>
-                                        @foreach ($users as $user)
+                                        @foreach ($partais as $partai)
                                         <tr>
                                             <td>
-                                                {{$user->name}}
+                                                {{$partai->id}}
                                             </td>
                                             <td>
-                                                {{$user->email}}
+                                                {{$partai->nm_partai}}
                                             </td>
                                             <td>
-                                                {{$user->phone}}
+                                                {{$partai->no_partai}}
                                             </td>
+
                                             <td>
-                                                {{$user->created_at}}
-                                            </td>
-                                            <td>
-                                                <div class="d-flex justify-content-center">
-                                                    <a href='{{ route('user.edit', $user->id) }}'
+                                                <div class="d-flex left-content-center">
+                                                    <a href='{{ route('partai.edit', $partai->id) }}'
                                                         class="btn btn-sm btn-info btn-icon">
                                                         <i class="fas fa-edit"></i>
                                                         Edit
                                                     </a>
 
-                                                    <form action="{{ route('user.destroy', $user->id) }}" method="POST"
+                                                    <form action="{{ route('partai.destroy', $partai->id) }}" method="POST"
                                                         class="ml-2">
                                                         <input type="hidden" name="_method" value="DELETE" />
                                                         <input type="hidden" name="_token"
@@ -115,7 +111,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $users->withQueryString()->links() }}
+                                    {{ $partais->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>

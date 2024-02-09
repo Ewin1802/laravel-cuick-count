@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Advanced Forms')
+@section('title', 'Edit Data Caleg')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -22,36 +22,59 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Advanced Forms</h1>
+                <h1>Data Dapil</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                     <div class="breadcrumb-item"><a href="#">Forms</a></div>
-                    <div class="breadcrumb-item">Users</div>
+                    <div class="breadcrumb-item">Dapil</div>
                 </div>
             </div>
 
             <div class="section-body">
-                <h2 class="section-title">Users</h2>
-                <p class="section-lead">Jangan biarkan Allien mendaftar disini !!!</p>
+                <h2 class="section-title">Petunjuk</h2>
+                <p class="section-lead">Pilih terlebih dahulu Nama Kecamatan dan Dapil</p>
 
 
                         <div class="card">
-                            <form action="{{ route('user.store')}}" method="POST">
+                            <form action="{{ route('lokasi.update', $lokasi) }}" method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="card-header">
-                                <h4>Input Text</h4>
+                                <h4>Masukkan Teks dan Angka</h4>
                             </div>
-                            
+
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label>Name</label>
+                                    <label for="nm_kec">Nama Kecamatan:</label>
+                                    <select name="nm_kec" id="nm_kec" class="form-control">
+                                        @foreach(['Pinogaluman','Kaidipang','Bolangitang Barat','Bolangitang Timur', 'Bintauna', 'Sangkub'] as $option)
+                                            <option value="{{ $option }}" {{ $lokasi->nm_kec === $option ? 'selected' : '' }}>{{ $option }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="dapil">Dapil:</label>
+                                    <select name="dapil" id="dapil" class="form-control">
+                                        @foreach(['DAPIL I','DAPIL II','DAPIL III',] as $option)
+                                            <option value="{{ $option }}" {{ $lokasi->dapil === $option ? 'selected' : '' }}>{{ $option }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>Nama Desa</label>
                                     <input type="text"
                                     class="form-control
-                                    @error('name')
+                                    @error('nm_desa')
                                         is-invalid
                                     @enderror"
-                                    name="name">
-                                    @error('name')
+                                    name="nm_desa" value="{{ $lokasi->nm_desa }}">
+                                    @error('nm_desa')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -59,14 +82,14 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email"
+                                    <label>Jumlah TPS (diisi dengan angka)</label>
+                                    <input type="number"
                                     class="form-control
-                                    @error('email')
+                                    @error('jlh_tps')
                                         is-invalid
                                     @enderror"
-                                    name="email">
-                                    @error('email')
+                                    name="jlh_tps" value="{{ $lokasi->jlh_tps }}">
+                                    @error('jlh_tps')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -74,59 +97,28 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Password</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <i class="fas fa-lock"></i>
-                                            </div>
-                                        </div>
-                                        <input type="password"
-                                            class="form-control @error('password')
-                                                is-invalid
-                                            @enderror"
-                                            name="password">
-                                    </div>
-                                    @error('password')
+                                    <label>Jumlah Pemilih (diisi dengan angka)</label>
+                                    <input type="number"
+                                    class="form-control
+                                    @error('jlh_pemilih')
+                                        is-invalid
+                                    @enderror"
+                                    name="jlh_pemilih" value="{{ $lokasi->jlh_pemilih }}">
+                                    @error('jlh_pemilih')
                                         <div class="invalid-feedback">
-                                                {{ $message }}
+                                            {{ $message }}
                                         </div>
-                                   @enderror
+                                    @enderror
                                 </div>
 
-                                <div class="form-group">
-                                    <label>Phone</label>
-                                    <input type="number" class="form-control" name="phone">
+                                <div class="card-footer text-right">
+                                    <button class="btn btn-primary">Submit</button>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">Roles</label>
-                                    <div class="selectgroup w-100">
-                                        <label class="selectgroup-item">
-                                            <input type="radio" name="roles" value="ADMIN" class="selectgroup-input"
-                                                checked="">
-                                            <span class="selectgroup-button">Admin</span>
-                                        </label>
-                                        <label class="selectgroup-item">
-                                            <input type="radio" name="roles" value="STAFF" class="selectgroup-input">
-                                            <span class="selectgroup-button">Staff</span>
-                                        </label>
-                                        <label class="selectgroup-item">
-                                            <input type="radio" name="roles" value="USER" class="selectgroup-input">
-                                            <span class="selectgroup-button">User</span>
-                                        </label>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            </div>
-                            <div class="card-footer text-right">
-                                <button class="btn btn-primary">Submit</button>
                             </div>
                         </form>
-                        </div>
-
+                    </div>
+                </div>
             </div>
         </section>
     </div>

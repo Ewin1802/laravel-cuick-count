@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Users')
+@section('title', 'Data Caleg')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -12,15 +12,15 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Pengguna</h1>
+                <h1>Data Caleg</h1>
                 <div class="section-header-button">
-                    <a href="{{ route('user.create') }}"
-                        class="btn btn-primary">Tambah Pengguna</a>
+                    <a href="{{ route('paslon.create') }}"
+                        class="btn btn-primary">Tambah Data</a>
                 </div>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Pengguna</a></div>
-                    <div class="breadcrumb-item">Semua Pengguna</div>
+                    <div class="breadcrumb-item"><a href="#">Data Pemilihan</a></div>
+                    <div class="breadcrumb-item">Data Caleg</div>
                 </div>
             </div>
             <div class="section-body">
@@ -31,16 +31,16 @@
                 </div>
                 <h2 class="section-title">Petunjuk</h2>
                 <p class="section-lead">
-                    Anda dapat mengelola semua pengguna, seperti mengedit, menghapus, dan lainnya.
+                    Pada Halaman ini, Anda dapat mencari data Caleg serta Mengubah dan Menghapus Data.
                 </p>
 
 
                 <div class="row mt-4">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4>Semua Data Pengguna</h4>
-                            </div>
+                            {{-- <div class="card-header">
+                                <h4>Daftar Caleg</h4>
+                            </div> --}}
                             <div class="card-body">
                                 {{-- <div class="float-left">
                                     <select class="form-control selectric">
@@ -50,12 +50,15 @@
                                         <option>Delete Pemanently</option>
                                     </select>
                                 </div> --}}
+                                <div class="card-header">
+                                    <h4>Data Caleg</h4>
+                                </div>
                                 <div class="float-right">
-                                    <form method="GET" action="{{route('user.index')}}">
+                                    <form method="GET" action="{{route('paslon.index')}}">
                                         <div class="input-group">
                                             <input type="text"
                                                 class="form-control"
-                                                placeholder="Cari Nama Pengguna" name="name">
+                                                placeholder="Cari Nama Caleg" name="nama_paslon">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
@@ -68,36 +71,38 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
-
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Created At</th>
+                                            {{-- <th>id</th> --}}
+                                            <th>Nama Caleg</th>
+                                            <th>Nomor Urut Caleg</th>
+                                            <th>Partai</th>
                                             <th>Action</th>
                                         </tr>
-                                        @foreach ($users as $user)
+
+                                        @foreach ($paslons as $paslon)
                                         <tr>
+                                            {{-- <td>
+                                                {{$paslon->id}}
+                                            </td> --}}
+
                                             <td>
-                                                {{$user->name}}
+                                                {{$paslon->nama_paslon}}
                                             </td>
                                             <td>
-                                                {{$user->email}}
+                                                {{$paslon->no_urut}}
                                             </td>
                                             <td>
-                                                {{$user->phone}}
+                                                {{$paslon->nama_partai}}
                                             </td>
+
                                             <td>
-                                                {{$user->created_at}}
-                                            </td>
-                                            <td>
-                                                <div class="d-flex justify-content-center">
-                                                    <a href='{{ route('user.edit', $user->id) }}'
+                                                <div class="d-flex left-content-center">
+                                                    <a href='{{ route('paslon.edit', $paslon->id) }}'
                                                         class="btn btn-sm btn-info btn-icon">
                                                         <i class="fas fa-edit"></i>
                                                         Edit
                                                     </a>
 
-                                                    <form action="{{ route('user.destroy', $user->id) }}" method="POST"
+                                                    <form action="{{ route('paslon.destroy', $paslon->id) }}" method="POST"
                                                         class="ml-2">
                                                         <input type="hidden" name="_method" value="DELETE" />
                                                         <input type="hidden" name="_token"
@@ -111,11 +116,13 @@
                                         </tr>
                                         @endforeach
 
+                                        {{-- @foreach ($partais as $partai)
+                                        @endforeach --}}
 
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $users->withQueryString()->links() }}
+                                    {{ $paslons->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>

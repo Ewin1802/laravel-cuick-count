@@ -31,13 +31,13 @@ body.skin-reverse .main-sidebar .sidebar-menu li a {
   color: color_lighten(primary, 25%);
 }
 body.skin-reverse .main-sidebar .sidebar-menu li a:hover {
-  background-color: #6070e5;
+  background-color: #072401;
 }
 body.skin-reverse .main-sidebar .sidebar-menu li.active a,
 body.skin-reverse .main-sidebar .sidebar-menu li.active a:hover,
 body.skin-reverse .main-sidebar .sidebar-menu li.active ul.dropdown-menu li a:hover,
 body.skin-reverse .main-sidebar .sidebar-menu li.active ul.dropdown-menu li a {
-  background-color: #6070e5;
+  background-color: #072401;
 }
 body.skin-reverse .main-sidebar .sidebar-menu li.menu-header {
   color: #afb7ff;

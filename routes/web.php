@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PaslonController;
+use App\Http\Controllers\LokasiController;
+use App\Http\Controllers\PartaiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,18 +18,29 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('pages.auth.login');
+     return view('pages.auth.login');
 });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('home', function () {
-        return view('pages.dashboard');
+        return view('pages.modules-calendar');
     })->name('home');
 
     Route::resource('user', UserController::class);
-   // Route::resource('soal', SoalController::class );
+    Route::resource('paslon', PaslonController::class );
+    Route::resource('lokasi', LokasiController::class );
+    Route::resource('partai', PartaiController::class );
 
 });
+
+Route::get('/modules-calendar', function () {
+    return view('pages.modules-calendar', ['type_menu' => 'modules']);
+});
+Route::get('/modules-chartjs', function () {
+    return view('pages.modules-chartjs', ['type_menu' => 'modules']);
+});
+
+// Route::put('/lokasi{id}', 'LokasiController@updateEnum')->name('update.enum');
 
 // Route::get('/login', function () {
 //     return view('pages.auth.login');

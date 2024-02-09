@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit User')
+@section('title', 'Edit Data Partai')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -22,36 +22,36 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Data Pengguna</h1>
+                <h1>Advanced Forms</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Pengguna</a></div>
-                    <div class="breadcrumb-item">Semua Pengguna</div>
+                    <div class="breadcrumb-item"><a href="#">Forms</a></div>
+                    <div class="breadcrumb-item">Partai</div>
                 </div>
             </div>
 
             <div class="section-body">
-                <h2 class="section-title">Petunjuk</h2>
-                <p class="section-lead">Ubahlah Nama sesuai KTP, Akte Kelahiran, dan Akte-akte lainnya. Password tidak bisa diubah meskipun diisi dengan Value yang baru</p>
+                <h2 class="section-title">Partai</h2>
+                <p class="section-lead">Jangan biarkan Allien mendaftar disini !!!</p>
 
 
                         <div class="card">
-                            <form action="{{ route('user.update', $user) }}" method="POST">
+                            <form action="{{ route('partai.update', $partai) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="card-header">
-                                <h4>Masukkan Text dan Angka</h4>
+                                <h4>Input Text</h4>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label>Name</label>
+                                    <label>Nama Partai</label>
                                     <input type="text"
                                     class="form-control
-                                    @error('name')
+                                    @error('nm_partai')
                                         is-invalid
                                     @enderror"
-                                    name="name" value="{{ $user->name }}">
-                                    @error('name')
+                                    name="nm_partai" value="{{ $partai->nm_partai }}">
+                                    @error('nm_partai')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -59,47 +59,21 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email"
+                                    <label>No Urut Partai</label>
+                                    <input type="text"
                                     class="form-control
-                                    @error('email')
+                                    @error('no_partai')
                                         is-invalid
                                     @enderror"
-                                    name="email" value="{{ $user->email }}">
-                                    @error('email')
+                                    name="no_partai" value="{{ $partai->no_partai }}">
+                                    @error('no_partai')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
 
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <i class="fas fa-lock"></i>
-                                            </div>
-                                        </div>
-                                        <input type="password"
-                                            class="form-control @error('password')
-                                                is-invalid
-                                            @enderror"
-                                            name="password">
-                                    </div>
-                                    @error('password')
-                                        <div class="invalid-feedback">
-                                                {{ $message }}
-                                        </div>
-                                   @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Phone</label>
-                                    <input type="number" class="form-control" name="phone" value="{{ $user->phone }}">
-                                </div>
-
-                                <div class="form-group">
+                                    {{-- <div class="form-group">
                                     <label class="form-label">Roles</label>
                                     <div class="selectgroup w-100">
                                         <label class="selectgroup-item">
@@ -117,9 +91,8 @@
                                             @if ($user->roles == 'USER') checked @endif>
                                             <span class="selectgroup-button">User</span>
                                         </label>
-
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
 
                             </div>

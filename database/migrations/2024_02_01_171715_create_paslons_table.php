@@ -13,14 +13,10 @@ return new class extends Migration
     {
         Schema::create('paslons', function (Blueprint $table) {
             $table->id();
-            $table->string('partai');
-            $table->string('no_urut');
+            $table->enum('nama_partai', ['1 - PKB','2 - GERINDRA','3 - PDIP','4 - GOLKAR', '5 - NASDEM', '6 - PARTAI BURUH', '7 - GELORA','8 - PKS','9 - PKN','10 - HANURA','11 - GARUDA','12 - PAN','13 - PBB','14 - DEMOKRAT','15 - PSI','16 - PERINDO','17 - PPP'])->default('17 - PPP');
+            // $table->string('nama_partai')->constrained('nm_partai')->on('partais');
             $table->string('nama_paslon');
-            $table->enum('nm_desa', ['Sonuo','Langi','Iyok','Tote']);
-            $table->enum('tps', ['1','2','3','4']);
-            $table->enum('nm_kec', ['Pinogaluman','Kaidipang','Bolbar','Boltim', 'Bintauna', 'Sangkub']);
-            $table->integer('jlh_pemilih');
-            $table->integer('jlh_suara');
+            $table->string('no_urut');
             $table->timestamps();
         });
     }
