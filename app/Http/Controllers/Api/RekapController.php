@@ -81,6 +81,10 @@ class RekapController extends Controller
                     'suara' => $total_suara,
                     'jlh_pemilih' => $jlh_pemilih,
                 ]);
+            } else {
+                // Jika data sudah ada, update nilai kolom 'suara' dengan total suara
+                $existingSonuoInDesa->suara = $total_suara;
+                $existingSonuoInDesa->save();
             }
         }
 
@@ -102,14 +106,26 @@ class RekapController extends Controller
         echo "Jumlah Caleg sebanyak : $count_jbs Orang\n";
 
         foreach ($jbs as $index => $jbx) {
-            // Cek apakah nilai 'Sonuo' sudah ada di dalam kolom 'Desa'
+            // Cari nilai 'jlh_pemilih' dari tabel Lokasi berdasarkan 'desa'
+            $lokasi = Lokasi::where('nm_desa', $jbx->desa)->first();
+            $jlh_pemilih = $lokasi ? $lokasi->jlh_pemilih : 0;
+
+            // Hitung total suara dari kolom tps_1, tps_2, dan tps_3
+            $total_suara = $jbx->tps_1 + $jbx->tps_2 + $jbx->tps_3 + $jbx->tps_4 + $jbx->tps_5 + $jbx->tps_6 + $jbx->tps_7 + $jbx->tps_8 + $jbx->tps_9 + $jbx->tps_10 + $jbx->tps_11 + $jbx->tps_12;
+
+            // Cek apakah nilai 'Jbs' sudah ada di dalam kolom 'Desa'
             $existingJbsInDesa = Desa::where('desa', $jbx->desa)->where('caleg', $jbx->nm_caleg)->first();
             if (!$existingJbsInDesa) {
                 Desa::create([
                     'caleg' => $jbx->nm_caleg,
                     'desa' => $jbx->desa,
-                    'suara' => $jbx->jlh_suara,
+                    'suara' => $total_suara,
+                    'jlh_pemilih' => $jlh_pemilih,
                 ]);
+            } else {
+                 // Jika data sudah ada, update nilai kolom 'suara' dengan total suara
+                $existingJbsInDesa->suara = $total_suara;
+                $existingJbsInDesa->save();
             }
         }
 
