@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaslonController;
 use App\Http\Controllers\LokasiController;
-use App\Http\Controllers\PartaiController;
+use App\Http\Controllers\SonuoController;
+use App\Http\Controllers\JambusarangController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +31,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('paslon', PaslonController::class );
     Route::resource('lokasi', LokasiController::class );
-    Route::resource('partai', PartaiController::class );
+    Route::resource('sonuo', SonuoController::class );
+    Route::resource('jambusarang', JambusarangController::class );
 
 });
 

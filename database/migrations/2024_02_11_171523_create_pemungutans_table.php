@@ -13,16 +13,11 @@ return new class extends Migration
     {
         Schema::create('pemungutans', function (Blueprint $table) {
             $table->id();
-             //paslon_id
-             $table->foreignId('paslon_id')->constrained('paslons')->onDelete('cascade');
-             //lokasi_id
-             $table->foreignId('lokasi_id')->constrained('lokasis')->onDelete('cascade');
 
-            //jumlah suara di tps
-             $table->integer('tps_1')->nullable();
-             $table->integer('tps_2')->nullable();
-             $table->integer('tps_3')->nullable();
-             $table->integer('jlh_suara')->nullable();
+             $table->string('nm_paslon')->constrained('nama_paslon')->on('paslons');
+             $table->string('lokasi_id')->constrained('id')->on('lokasis');
+             $table->string('nm_dapil')->constrained('nm_desa')->on('lokasis');
+             $table->integer('suara')->nullable();
              //validateds (ya, tidak)
              $table->enum('validateds', ['ya', 'tidak'])->default('tidak');
             $table->timestamps();

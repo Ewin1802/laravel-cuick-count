@@ -5,13 +5,15 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PartaiSeeder extends Seeder
+class JambusarangSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        \App\Models\Partai::factory(10)->create();
+        \App\Models\Jambusarang::factory()
+        ->count(1)
+        ->create();
     }
 }

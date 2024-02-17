@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('calenders', function (Blueprint $table) {
+        Schema::create('desas', function (Blueprint $table) {
             $table->id();
+            $table->string('caleg');
+            $table->string('desa');
+            // $table->string('jlh_pemilih')->constrained('jlh_pemilih')->on('lokasis');
+            $table->string('jlh_pemilih')->nullable();
+            $table->string('suara')->nullable();
+            $table->string('golput')->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('calenders');
+        Schema::dropIfExists('desas');
     }
 };

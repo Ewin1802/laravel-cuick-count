@@ -16,4 +16,13 @@ class Lokasi extends Model
         'jlh_tps',
         'jlh_pemilih',
     ];
+
+    public function pemungutan()
+    {
+        return $this->hasMany(Pemungutan::class);
+    }
+    public function desa()
+    {
+        return $this->hasMany(Desa::class);
+    }
 }

@@ -1,22 +1,23 @@
 <?php
 
 namespace App\Models;
-use App\Models\Paslon;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Partai extends Model
+class Desa extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id';
     protected $fillable = [
-    'nm_partai',
-    'no_partai',
+        'caleg',
+        'desa',
+        'jlh_pemilih',
+        'suara',
+        'golput',
     ];
 
-     public function paslon()
+    public function lokasi()
     {
-        return $this->hasMany(Paslon::class);
+        return $this->belongsTo(Lokasi::class);
     }
 }
