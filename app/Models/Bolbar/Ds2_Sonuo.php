@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Bolbar;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sonuo extends Model
+class Ds2_Sonuo extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'nm_caleg',
+        'nm_partai',
         'dapil',
         'desa',
         'tps_1',

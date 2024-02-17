@@ -10,14 +10,20 @@ class Desa extends Model
     use HasFactory;
     protected $fillable = [
         'caleg',
+        'partai',
         'desa',
-        'jlh_pemilih',
+        'dapil',
+        'jlh_dpt',
         'suara',
-        'golput',
+
     ];
 
     public function lokasi()
     {
         return $this->belongsTo(Lokasi::class);
+    }
+    public function paslon()
+    {
+        return $this->belongsTo(Paslon::class);
     }
 }

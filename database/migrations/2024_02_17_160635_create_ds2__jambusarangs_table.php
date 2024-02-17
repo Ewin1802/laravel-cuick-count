@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jambusarangs', function (Blueprint $table) {
+        Schema::create('ds2__jambusarangs', function (Blueprint $table) {
             $table->id();
             $table->string('nm_caleg')->constrained('nama_paslon')->on('paslons');
+            $table->string('nm_partai')->constrained('nama_partai')->on('paslons');
             $table->string('dapil')->default('DAPIL II');
             $table->string('desa')->default('Jambusarang');
             //jumlah suara di tps
@@ -30,7 +31,7 @@ return new class extends Migration
             $table->integer('tps_11')->default(0);
             $table->integer('tps_12')->default(0);
             $table->integer('jlh_suara')->default(0);
-             $table->enum('validateds', ['ya', 'tidak'])->default('tidak');
+            $table->enum('validateds', ['ya', 'tidak'])->default('tidak');
             $table->timestamps();
         });
     }
@@ -40,6 +41,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jambusarangs');
+        Schema::dropIfExists('ds2__jambusarangs');
     }
 };

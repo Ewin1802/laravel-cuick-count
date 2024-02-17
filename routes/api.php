@@ -3,8 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\CalegController;
-use App\Http\Controllers\Api\RekapController;
+use App\Http\Controllers\Api\Dapil2Controller;
+use App\Http\Controllers\Api\RekapDapil2Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,13 +31,19 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
 //create caleg
-Route::post('/create-caleg', [CalegController::class, 'createCaleg'])->middleware('auth:sanctum');
+Route::post('/create-dapil2', [Dapil2Controller::class, 'createCaleg'])->middleware('auth:sanctum');
 
 //post rekap desa jbs
-Route::post('/rekap-jbs', [RekapController::class, 'rekapJbs'])->middleware('auth:sanctum');
+Route::post('/rekap-jbs', [RekapDapil2Controller::class, 'rekapJbs'])->middleware('auth:sanctum');
 
 //post rekap desa Sonuo
-Route::post('/rekap-sonuo', [RekapController::class, 'rekapSonuo'])->middleware('auth:sanctum');
+Route::post('/rekap-sonuo', [RekapDapil2Controller::class, 'rekapSonuo'])->middleware('auth:sanctum');
+
+//post rekap desa Langi
+Route::post('/rekap-langi', [RekapDapil2Controller::class, 'rekapLangi'])->middleware('auth:sanctum');
+
+//post rekap desa Iyok
+Route::post('/rekap-iyok', [RekapDapil2Controller::class, 'rekapIyok'])->middleware('auth:sanctum');
 
 
 // //Resgister

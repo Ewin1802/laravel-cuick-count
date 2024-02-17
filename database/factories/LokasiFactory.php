@@ -21,7 +21,7 @@ class LokasiFactory extends Factory
             'nm_kec' => $this->faker->randomElement(['Pinogaluman','Kaidipang','Bolangitang Barat','Bolangitang Timur', 'Bintauna', 'Sangkub']),
             'dapil' => $this->faker->randomElement(['DAPIL I','DAPIL II','DAPIL III']),
             'jlh_tps' =>  $this->faker->numberBetween(1,8),
-            'jlh_pemilih' => $this->faker->numberBetween(600,1500),
+            'jlh_DPT' => $this->faker->numberBetween(600,1500),
         ];
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->enum('nm_kec', ['Pinogaluman','Kaidipang','Bolangitang Barat','Bolangitang Timur', 'Bintauna', 'Sangkub'])->default('Bolangitang Barat');
             $table->enum('dapil', ['DAPIL I','DAPIL II','DAPIL III']);
             $table->string('jlh_tps');
-            $table->string('jlh_pemilih');
+            $table->string('jlh_DPT');
             $table->timestamps();
         });
     }

@@ -25,9 +25,10 @@ class Paslon extends Model
     {
         return $this->belongsTo(Pemungutan::class);
     }
+    public function desa()
+    {
+        return $this->belongsTo(Desa::class);
+    }
 
-    public function sonuo()
-        {
-            return $this->belongsTo(Sonuo::class);
-        }
+    
 }

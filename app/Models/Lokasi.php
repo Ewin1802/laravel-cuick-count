@@ -14,7 +14,7 @@ class Lokasi extends Model
         'nm_kec',
         'dapil',
         'jlh_tps',
-        'jlh_pemilih',
+        'jlh_DPT',
     ];
 
     public function pemungutan()

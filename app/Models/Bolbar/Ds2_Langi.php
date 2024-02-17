@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Bolbar;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Jambusarang extends Model
+class Ds2_Langi extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'nm_caleg',
+        'nm_partai',
         'dapil',
         'desa',
         'tps_1',
@@ -29,10 +29,6 @@ class Jambusarang extends Model
         'validateds',
     ];
 
-    // public function paslon()
-    // {
-    //     return $this->belongsTo(Paslon::class);
-    // }
     public function paslon()
     {
         return $this->hasMany(Paslon::class);

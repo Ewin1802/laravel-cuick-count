@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Paslon;
-use App\Models\Sonuo;
-use App\Models\Jambusarang;
+use App\Models\Bolbar\Ds2_Sonuo;
+use App\Models\Bolbar\Ds2_Jambusarang;
+use App\Models\Bolbar\Ds2_Langi;
+use App\Models\Bolbar\Ds2_Iyok;
 use App\Models\Pemungutan;
 use App\Models\Desa;
 use App\Http\Requests\StorePaslonRequest;
 use App\Http\Resources\PemungutanResource;
 
-class CalegController extends Controller
+class Dapil2Controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -58,8 +60,10 @@ class CalegController extends Controller
     public function createCaleg(Request $request)
     {
         $paslons = Paslon::inRandomOrder()->get();
-        $sonuos = Sonuo::inRandomOrder()->get();
-        $jbs = Jambusarang::inRandomOrder()->get();
+        $sonuos = Ds2_Sonuo::inRandomOrder()->get();
+        $jbs = Ds2_Jambusarang::inRandomOrder()->get();
+        $langis = Ds2_Langi::inRandomOrder()->get();
+        $iyoks = Ds2_Iyok::inRandomOrder()->get();
 
         $count_paslons = count($paslons);
         $count_sonuos = count($sonuos);
@@ -70,34 +74,40 @@ class CalegController extends Controller
         if ($counts === 0) {
             foreach ($paslons as $index => $paslon) {
             // Periksa apakah tabel Sonuo dengan "nm_caleg" yang sama sudah ada
-            $existingSonuo = Sonuo::where('nm_caleg', $paslon->nama_paslon)->first();
+            $existingSonuo = Ds2_Sonuo::where('nm_caleg', $paslon->nama_paslon)->first();
             // Jika rekaman tabel Sonuo dengan "nm_caleg" yang sama tidak ada, eksekusi perintah berdasarkan nama paslon
             if (!$existingSonuo) {
-                Sonuo::create([
+                Ds2_Sonuo::create([
                     'nm_caleg' => $paslon->nama_paslon,
+                    'nm_partai' => $paslon->nama_partai,
                 ]);
             }
 
-            $existingJambusarang = Jambusarang::where('nm_caleg', $paslon->nama_paslon)->first();
+            $existingJambusarang = Ds2_Jambusarang::where('nm_caleg', $paslon->nama_paslon)->first();
             if (!$existingJambusarang) {
-                Jambusarang::create([
+                Ds2_Jambusarang::create([
                     'nm_caleg' => $paslon->nama_paslon,
+                    'nm_partai' => $paslon->nama_partai,
                 ]);
             }
+            $existingLangi = Ds2_Langi::where('nm_caleg', $paslon->nama_paslon)->first();
+            if (!$existingLangi) {
+                Ds2_Langi::create([
+                    'nm_caleg' => $paslon->nama_paslon,
+                    'nm_partai' => $paslon->nama_partai,
+                ]);
+            }
+            $existingIyok = Ds2_Iyok::where('nm_caleg', $paslon->nama_paslon)->first();
+            if (!$existingIyok) {
+                Ds2_Iyok::create([
+                    'nm_caleg' => $paslon->nama_paslon,
+                    'nm_partai' => $paslon->nama_partai,
+                ]);
+            }
+
         }
         } else {
             $count = min($count_paslons, $count_sonuos);
-            // for ($index = 0; $index < $count; $index++) {
-            //     $paslon = $paslons[$index];
-            //     $sonuo = $sonuos[$index];
-            //     $jbs = $jbs[$index];
-
-            //     // Desa::create([
-            //     //     'caleg' => $sonuo->$jbs->nm_caleg,
-            //     //     'desa' => $sonuo->$jbs->desa,
-            //     //     'jlh_pemilih' => $sonuo->jlh_suara,
-            //     // ]);
-            // }
             for ($index = $count; $index < $count_paslons; $index++) {
                 echo "Index $index does not exist in the \$sonuos array";
                 // Handle the case where the index does not exist in the $sonuos array
@@ -120,7 +130,7 @@ class CalegController extends Controller
             'nm_caleg' => 'required',
         ]);
 
-       $sonuos = Sonuo::where('nm_caleg', $validatedData['nm_caleg'])->first();
+       $sonuos = Ds2_Sonuo::where('nm_caleg', $validatedData['nm_caleg'])->first();
         if (!$sonuos) {
             return response()->json([
                 'message' => 'Caleg tidak ditemukan',

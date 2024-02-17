@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sonuos', function (Blueprint $table) {
+        Schema::create('ds2__langis', function (Blueprint $table) {
             $table->id();
             $table->string('nm_caleg')->constrained('nama_paslon')->on('paslons');
+            $table->string('nm_partai')->constrained('nama_partai')->on('paslons');
             $table->string('dapil')->default('DAPIL II');
-            $table->string('desa')->default('Sonuo');
+            $table->string('desa')->default('Langi');
             //jumlah suara di tps
              $table->integer('tps_1')->default(0);
              $table->integer('tps_2')->default(0);
@@ -40,6 +41,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sonuos');
+        Schema::dropIfExists('ds2__langis');
     }
 };

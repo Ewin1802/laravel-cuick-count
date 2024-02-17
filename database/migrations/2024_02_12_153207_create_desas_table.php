@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('caleg');
             $table->string('desa');
-            // $table->string('jlh_pemilih')->constrained('jlh_pemilih')->on('lokasis');
-            $table->string('jlh_pemilih')->nullable();
+            $table->string('dapil')->nullable();
+            $table->string('partai');
+            $table->string('jlh_dpt')->nullable();
             $table->string('suara')->nullable();
-            $table->string('golput')->nullable();
             $table->timestamps();
         });
     }
