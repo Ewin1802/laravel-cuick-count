@@ -77,7 +77,7 @@
                                             <th>Kecamatan</th>
                                             <th>Dapil</th>
                                             <th>Jumlah TPS</th>
-                                            <th>Jumlah Pemilih</th>
+                                            <th>Jumlah DPT</th>
 
                                             <th>Action</th>
                                         </tr>
@@ -102,7 +102,7 @@
                                             </td>
 
                                             <td>
-                                                {{$lokasi->jlh_pemilih}}
+                                                {{$lokasi->jlh_DPT}}
                                             </td>
 
                                             <td>

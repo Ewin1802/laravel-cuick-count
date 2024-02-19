@@ -10,6 +10,7 @@ use App\Models\Bolbar\Ds2_Sonuo;
 use App\Models\Bolbar\Ds2_Jambusarang;
 use App\Models\Bolbar\Ds2_Langi;
 use App\Models\Bolbar\Ds2_Iyok;
+use App\Models\Bolbar\Ds2_Bolangitang;
 use App\Models\Pemungutan;
 use App\Models\Desa;
 use App\Models\Lokasi;
@@ -179,6 +180,41 @@ class RekapDapil2Controller extends Controller
         echo "Jumlah Paslon sebanyak : $count Orang\n";
 
         foreach ($iyoks as $index => $data) {
+            $lokasi = Lokasi::where('nm_desa', $data->desa)->first();
+            $jlh_dpt = $lokasi ? $lokasi->jlh_DPT : 0;
+            $total_suara = $data->tps_1 + $data->tps_2 + $data->tps_3 + $data->tps_4 + $data->tps_5 + $data->tps_6 + $data->tps_7 + $data->tps_8 + $data->tps_9 + $data->tps_10 + $data->tps_11 + $data->tps_12;
+            $existingDataInDesa = Desa::where('desa', $data->desa)->where('caleg', $data->nm_caleg)->first();
+            if (!$existingDataInDesa) {
+                Desa::create([
+                    'caleg' => $data->nm_caleg,
+                    'partai' => $data->nm_partai,
+                    'desa' => $data->desa,
+                    'dapil' => $data->dapil,
+                    'suara' => $total_suara,
+                    'jlh_dpt' => $jlh_dpt,
+                ]);
+            } else {
+                $existingDataInDesa->suara = $total_suara;
+                $existingDataInDesa->jlh_dpt = $jlh_dpt;
+                $existingDataInDesa->save();
+            }
+        }
+        return response()->json([
+            'message' => 'Data Caleg berhasil Di Create pada Tabel Desa',
+            'data' => "Jumlah Caleg sebanyak: $count orang",
+        ]);
+    }
+
+    public function rekapBolit (Request $request) {
+
+        $desa = Desa::inRandomOrder()->get();
+        $bolits = Ds2_Bolangitang::inRandomOrder()->get();
+
+        $count = count($bolits);
+
+        echo "Jumlah Paslon sebanyak : $count Orang\n";
+
+        foreach ($bolits as $index => $data) {
             $lokasi = Lokasi::where('nm_desa', $data->desa)->first();
             $jlh_dpt = $lokasi ? $lokasi->jlh_DPT : 0;
             $total_suara = $data->tps_1 + $data->tps_2 + $data->tps_3 + $data->tps_4 + $data->tps_5 + $data->tps_6 + $data->tps_7 + $data->tps_8 + $data->tps_9 + $data->tps_10 + $data->tps_11 + $data->tps_12;

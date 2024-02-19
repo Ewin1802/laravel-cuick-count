@@ -31,7 +31,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
 //create caleg
-Route::post('/create-dapil2', [Dapil2Controller::class, 'createCaleg'])->middleware('auth:sanctum');
+Route::post('/create-dapil2', [Dapil2Controller::class, 'createPaslon'])->middleware('auth:sanctum');
 
 //post rekap desa jbs
 Route::post('/rekap-jbs', [RekapDapil2Controller::class, 'rekapJbs'])->middleware('auth:sanctum');
@@ -44,6 +44,9 @@ Route::post('/rekap-langi', [RekapDapil2Controller::class, 'rekapLangi'])->middl
 
 //post rekap desa Iyok
 Route::post('/rekap-iyok', [RekapDapil2Controller::class, 'rekapIyok'])->middleware('auth:sanctum');
+
+//post rekap desa Bolangitang
+Route::post('/rekap-bolit', [RekapDapil2Controller::class, 'rekapBolit'])->middleware('auth:sanctum');
 
 
 // //Resgister

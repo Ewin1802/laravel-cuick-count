@@ -43,7 +43,7 @@
 
                     <li class="{{ Request::is('paslon.index') ? 'active' : '' }}">
                         <a class="nav-link"
-                            href="{{ route('paslon.index') }}">Data Caleg</a>
+                            href="{{ route('paslon.index') }}">Data Pasangan Calon</a>
                     </li>
                     <li >
                         <a class="nav-link"

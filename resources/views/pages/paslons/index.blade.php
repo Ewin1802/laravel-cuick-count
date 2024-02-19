@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Data Caleg')
+@section('title', 'Data Paslon')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -12,7 +12,7 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Data Caleg</h1>
+                <h1>Data Paslon</h1>
                 <div class="section-header-button">
                     <a href="{{ route('paslon.create') }}"
                         class="btn btn-primary">Tambah Data</a>
@@ -20,7 +20,7 @@
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                     <div class="breadcrumb-item"><a href="#">Data Pemilihan</a></div>
-                    <div class="breadcrumb-item">Data Caleg</div>
+                    <div class="breadcrumb-item">Data Paslon</div>
                 </div>
             </div>
             <div class="section-body">
@@ -31,7 +31,7 @@
                 </div>
                 <h2 class="section-title">Petunjuk</h2>
                 <p class="section-lead">
-                    Pada Halaman ini, Anda dapat mencari data Caleg serta Mengubah dan Menghapus Data.
+                    Pada Halaman ini, Anda dapat mencari data Paslon serta Mengubah dan Menghapus Data.
                 </p>
 
 
@@ -51,14 +51,14 @@
                                     </select>
                                 </div> --}}
                                 <div class="card-header">
-                                    <h4>Data Caleg</h4>
+                                    <h4>Data Paslon</h4>
                                 </div>
                                 <div class="float-right">
                                     <form method="GET" action="{{route('paslon.index')}}">
                                         <div class="input-group">
                                             <input type="text"
                                                 class="form-control"
-                                                placeholder="Cari Nama Caleg" name="nama_paslon">
+                                                placeholder="Cari Nama Paslon" name="nama_paslon">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
@@ -72,8 +72,8 @@
                                     <table class="table-striped table">
                                         <tr>
                                             {{-- <th>id</th> --}}
-                                            <th>Nama Caleg</th>
-                                            <th>Nomor Urut Caleg</th>
+                                            <th>Nama Paslon</th>
+                                            <th>Nomor Urut Paslon</th>
                                             <th>Partai</th>
                                             <th>Action</th>
                                         </tr>

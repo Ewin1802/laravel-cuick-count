@@ -9,6 +9,7 @@ use App\Models\Bolbar\Ds2_Sonuo;
 use App\Models\Bolbar\Ds2_Jambusarang;
 use App\Models\Bolbar\Ds2_Langi;
 use App\Models\Bolbar\Ds2_Iyok;
+use App\Models\Bolbar\Ds2_Bolangitang;
 use App\Models\Pemungutan;
 use App\Models\Desa;
 use App\Http\Requests\StorePaslonRequest;
@@ -57,19 +58,24 @@ class Dapil2Controller extends Controller
     }
 
     //create ujian
-    public function createCaleg(Request $request)
+    public function createPaslon(Request $request)
     {
         $paslons = Paslon::inRandomOrder()->get();
         $sonuos = Ds2_Sonuo::inRandomOrder()->get();
         $jbs = Ds2_Jambusarang::inRandomOrder()->get();
         $langis = Ds2_Langi::inRandomOrder()->get();
         $iyoks = Ds2_Iyok::inRandomOrder()->get();
+        $bolit = Ds2_Bolangitang::inRandomOrder()->get();
 
         $count_paslons = count($paslons);
+
         $count_sonuos = count($sonuos);
         $count_jambusarangs = count($jbs);
-        $counts = min($count_sonuos, $count_jambusarangs);
-        echo "Jumlah Caleg sebanyak : $count_paslons Orang\n";
+        $count_langis = count($langis);
+        $count_iyoks = count($iyoks);
+        $count_bolits = count($bolit);
+        $counts = min($count_sonuos, $count_jambusarangs, $count_langis, $count_iyoks, $count_bolits);
+        echo "Jumlah Paslon sebanyak : $count_paslons Orang\n";
 
         if ($counts === 0) {
             foreach ($paslons as $index => $paslon) {
@@ -104,20 +110,24 @@ class Dapil2Controller extends Controller
                     'nm_partai' => $paslon->nama_partai,
                 ]);
             }
+            $existingBolit = Ds2_Bolangitang::where('nm_caleg', $paslon->nama_paslon)->first();
+            if (!$existingBolit) {
+                Ds2_Bolangitang::create([
+                    'nm_caleg' => $paslon->nama_paslon,
+                    'nm_partai' => $paslon->nama_partai,
+                ]);
+            }
 
         }
         } else {
-            $count = min($count_paslons, $count_sonuos);
-            for ($index = $count; $index < $count_paslons; $index++) {
-                echo "Index $index does not exist in the \$sonuos array";
-                // Handle the case where the index does not exist in the $sonuos array
-                // For example, log an error message or perform some other action
-            }
+
+                $error;
+
         }
 
         return response()->json([
-            'message' => 'Data Caleg berhasil dibuat',
-            'data' => "Jumlah Caleg sebanyak: $count_paslons orang",
+            'message' => 'Data Paslon berhasil dibuat',
+            'data' => "Jumlah Paslon sebanyak: $count_paslons orang",
         ]);
     }
 
