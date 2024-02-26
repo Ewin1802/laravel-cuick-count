@@ -13,7 +13,7 @@ class PaslonController extends Controller
      */
     public function index(Request $request)
     {
-        //get all or by id
+        //ambil semua atau berdasarkan id
         $paslons = \App\Models\Paslon::when($request->id, function($query, $id){
             return $query->where('id', $id);
         })->get();
