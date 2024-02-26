@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Dapil2Controller;
 use App\Http\Controllers\Api\RekapDapil2Controller;
+use App\Http\Controllers\Api\PaslonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,9 @@ Route::post('/login', [AuthController::class, 'login']);
 
 //logout
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
+//create caleg
+Route::apiResource('paslons', \App\Http\Controllers\Api\PaslonController::class)->middleware('auth:sanctum');
 
 //create caleg
 Route::post('/create-dapil2', [Dapil2Controller::class, 'createPaslon'])->middleware('auth:sanctum');
