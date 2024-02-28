@@ -33,7 +33,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 
 //Desa Sonuo
 Route::apiResource('sonuo', \App\Http\Controllers\Api\dapil2\PaslonSonuoController::class)->middleware('auth:sanctum'); //get paslon sonuo
-Route::post('/updatesonuo', [UpdateDesaController::class, 'updatesonuo'])->middleware('auth:sanctum'); //update data suara paslon di desa sonuo
+Route::put('/updatesonuo', [UpdateDesaController::class, 'updatesonuo'])->middleware('auth:sanctum'); //update data suara paslon di desa sonuo
 
 //create caleg
 Route::post('/create-dapil2', [Dapil2Controller::class, 'createPaslon'])->middleware('auth:sanctum');
