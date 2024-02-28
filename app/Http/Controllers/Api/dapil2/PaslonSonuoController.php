@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\dapil2;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Paslon;
+use App\Models\Bolbar\Ds2_Sonuo;
 
-class PaslonController extends Controller
+class PaslonSonuoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class PaslonController extends Controller
     public function index(Request $request)
     {
         //ambil semua atau berdasarkan id
-        $paslons = \App\Models\Paslon::when($request->id, function($query, $id){
+        $paslons = \App\Models\Bolbar\Ds2_Sonuo::when($request->id, function($query, $id){
             return $query->where('id', $id);
         })->get();
 

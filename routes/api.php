@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Dapil2Controller;
 use App\Http\Controllers\Api\RekapDapil2Controller;
-use App\Http\Controllers\Api\PaslonController;
+use App\Http\Controllers\Api\UpdateDesaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +31,9 @@ Route::post('/login', [AuthController::class, 'login']);
 //logout
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
-//create caleg
-Route::apiResource('paslons', \App\Http\Controllers\Api\PaslonController::class)->middleware('auth:sanctum');
+//Desa Sonuo
+Route::apiResource('sonuo', \App\Http\Controllers\Api\dapil2\PaslonSonuoController::class)->middleware('auth:sanctum'); //get paslon sonuo
+Route::post('/updatesonuo', [UpdateDesaController::class, 'updatesonuo'])->middleware('auth:sanctum'); //update data suara paslon di desa sonuo
 
 //create caleg
 Route::post('/create-dapil2', [Dapil2Controller::class, 'createPaslon'])->middleware('auth:sanctum');
