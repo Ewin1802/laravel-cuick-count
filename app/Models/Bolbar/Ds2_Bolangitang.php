@@ -28,6 +28,7 @@ class Ds2_Bolangitang extends Model
         'tps_12',
         'jlh_suara',
         'validateds',
+        'user',
     ];
 
     public function paslon()

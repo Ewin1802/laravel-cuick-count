@@ -31,6 +31,7 @@ return new class extends Migration
             $table->integer('tps_11')->default(0);
             $table->integer('tps_12')->default(0);
             $table->integer('jlh_suara')->default(0);
+            $table->string('user')->nullable();
             $table->enum('validateds', ['ya', 'tidak'])->default('tidak');
             $table->timestamps();
         });

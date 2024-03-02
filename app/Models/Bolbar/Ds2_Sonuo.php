@@ -27,6 +27,7 @@ class Ds2_Sonuo extends Model
         'tps_12',
         'jlh_suara',
         'validateds',
+        'user',
     ];
 
     // public function paslon()

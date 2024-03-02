@@ -27,6 +27,7 @@ class Ds2_Jambusarang extends Model
         'tps_12',
         'jlh_suara',
         'validateds',
+        'user',
     ];
 
     // public function paslon()
