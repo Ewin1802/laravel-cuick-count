@@ -23,9 +23,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PaslonSeeder::class,
             LokasiSeeder::class,
-            PemungutanSeeder::class,
-            // SonuoSeeder::class,
-            // JambusarangSeeder::class,
         ]);
     }
 }

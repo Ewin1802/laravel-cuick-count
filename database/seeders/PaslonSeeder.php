@@ -13,15 +13,15 @@ class PaslonSeeder extends Seeder
     public function run(): void
     {
         \App\Models\Paslon::factory()
-        ->count(10)
+        ->count(2)
         ->create();
 
-        // \App\Models\User::create([
-        //     'name' => 'Admin Ewin',
-        //     'email' => 'ewin@fic10.com',
-        //     'password' => Hash::make('12345678'),
-        //     'roles' => 'ADMIN',
-        //     'phone' => '081340985993',
-        // ]);
+        \App\Models\Paslon::create([
+            'nama_partai' => '17 - PPP',
+            'nama_paslon' => 'M. Aditya Pontoh (MAP)',
+            'no_urut' => '1',
+
+        ]);
+
     }
 }

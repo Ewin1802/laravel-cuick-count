@@ -57,7 +57,7 @@ class Dapil2Controller extends Controller
         //
     }
 
-    //create ujian
+    //create Paslon
     public function createPaslon(Request $request)
     {
         $paslons = Paslon::inRandomOrder()->get();
@@ -120,9 +120,7 @@ class Dapil2Controller extends Controller
 
         }
         } else {
-
                 $error;
-
         }
 
         return response()->json([

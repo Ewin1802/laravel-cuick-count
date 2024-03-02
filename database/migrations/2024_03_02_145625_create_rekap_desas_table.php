@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('desas', function (Blueprint $table) {
+        Schema::create('rekap_desas', function (Blueprint $table) {
             $table->id();
             $table->string('caleg');
             $table->string('desa');
             $table->string('dapil')->nullable();
             $table->string('partai');
-            $table->string('jlh_dpt')->nullable();
+            $table->string('jlh_pemilih')->nullable();
             $table->string('suara')->nullable();
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('desas');
+        Schema::dropIfExists('rekap_desas');
     }
 };

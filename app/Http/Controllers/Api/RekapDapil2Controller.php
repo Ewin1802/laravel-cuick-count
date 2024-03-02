@@ -12,7 +12,7 @@ use App\Models\Bolbar\Ds2_Langi;
 use App\Models\Bolbar\Ds2_Iyok;
 use App\Models\Bolbar\Ds2_Bolangitang;
 use App\Models\Pemungutan;
-use App\Models\Desa;
+use App\Models\Rekap_desa;
 use App\Models\Lokasi;
 
 class RekapDapil2Controller extends Controller
@@ -59,7 +59,7 @@ class RekapDapil2Controller extends Controller
 
     public function rekapSonuo (Request $request) {
 
-        $desa = Desa::inRandomOrder()->get();
+        $desa = Rekap_desa::inRandomOrder()->get();
         $sonuos = Ds2_Sonuo::inRandomOrder()->get();
 
         $count = count($sonuos);
@@ -68,27 +68,29 @@ class RekapDapil2Controller extends Controller
 
         foreach ($sonuos as $index => $data) {
             // Cari nilai 'jlh_pemilih' dari tabel Lokasi berdasarkan 'desa'
-            $lokasi = Lokasi::where('nm_desa', $data->desa)->first();
-            $jlh_dpt = $lokasi ? $lokasi->jlh_DPT : 0;
+            // $lokasi = Lokasi::where('nm_desa', $data->desa)->first();
+            // $jlh_dpt = $lokasi ? $lokasi->jlh_DPT : 0;
 
             // Hitung total suara dari kolom tps_1, tps_2, dan tps_3
             $total_suara = $data->tps_1 + $data->tps_2 + $data->tps_3 + $data->tps_4 + $data->tps_5 + $data->tps_6 + $data->tps_7 + $data->tps_8 + $data->tps_9 + $data->tps_10 + $data->tps_11 + $data->tps_12;
 
+            $total_suara_desa = $sonuos->where('desa', $data->desa)->sum('jlh_suara');
             // Cek apakah nilai 'Sonuo' sudah ada di dalam kolom 'Desa'
-            $existingDataInDesa = Desa::where('desa', $data->desa)->where('caleg', $data->nm_caleg)->first();
+            $existingDataInDesa = Rekap_desa::where('desa', $data->desa)->where('caleg', $data->nm_caleg)->first();
+
             if (!$existingDataInDesa) {
-                Desa::create([
+                Rekap_desa::create([
                     'caleg' => $data->nm_caleg,
                     'partai' => $data->nm_partai,
                     'desa' => $data->desa,
                     'dapil' => $data->dapil,
                     'suara' => $total_suara,
-                    'jlh_dpt' => $jlh_dpt,
+                    'jlh_pemilih' => $total_suara_desa
                 ]);
             } else {
                 // Jika data sudah ada, update nilai kolom 'suara' dengan total suara
                 $existingDataInDesa->suara = $total_suara;
-                $existingDataInDesa->jlh_dpt = $jlh_dpt;
+                $existingDataInDesa->jlh_pemilih = $total_suara_desa;
                 $existingDataInDesa->save();
             }
         }
@@ -101,7 +103,7 @@ class RekapDapil2Controller extends Controller
 
     public function rekapJbs (Request $request) {
 
-        $desa = Desa::inRandomOrder()->get();
+        $desa = Rekap_desa::inRandomOrder()->get();
         $jbs = Ds2_Jambusarang::inRandomOrder()->get();
 
         $count = count($jbs);
@@ -109,22 +111,23 @@ class RekapDapil2Controller extends Controller
         echo "Jumlah Caleg sebanyak : $count Orang\n";
 
         foreach ($jbs as $index => $data) {
-            $lokasi = Lokasi::where('nm_desa', $data->desa)->first();
-            $jlh_dpt = $lokasi ? $lokasi->jlh_DPT : 0;
+            // $lokasi = Lokasi::where('nm_desa', $data->desa)->first();
+            // $jlh_dpt = $lokasi ? $lokasi->jlh_DPT : 0;
             $total_suara = $data->tps_1 + $data->tps_2 + $data->tps_3 + $data->tps_4 + $data->tps_5 + $data->tps_6 + $data->tps_7 + $data->tps_8 + $data->tps_9 + $data->tps_10 + $data->tps_11 + $data->tps_12;
-            $existingDataInDesa = Desa::where('desa', $data->desa)->where('caleg', $data->nm_caleg)->first();
+            $total_suara_desa = $jbs->where('desa', $data->desa)->sum('jlh_suara');
+            $existingDataInDesa = Rekap_desa::where('desa', $data->desa)->where('caleg', $data->nm_caleg)->first();
             if (!$existingDataInDesa) {
-                Desa::create([
+                Rekap_desa::create([
                     'caleg' => $data->nm_caleg,
                     'partai' => $data->nm_partai,
                     'desa' => $data->desa,
                     'dapil' => $data->dapil,
                     'suara' => $total_suara,
-                    'jlh_dpt' => $jlh_dpt,
+                    'jlh_pemilih' => $total_suara_desa
                 ]);
             } else {
                 $existingDataInDesa->suara = $total_suara;
-                $existingDataInDesa->jlh_dpt = $jlh_dpt;
+                $existingDataInDesa->jlh_pemilih = $total_suara_desa;
                 $existingDataInDesa->save();
             }
         }
@@ -137,7 +140,7 @@ class RekapDapil2Controller extends Controller
 
     public function rekapLangi (Request $request) {
 
-        $desa = Desa::inRandomOrder()->get();
+        $desa = Rekap_desa::inRandomOrder()->get();
         $langis = Ds2_Langi::inRandomOrder()->get();
 
         $count = count($langis);
@@ -145,22 +148,23 @@ class RekapDapil2Controller extends Controller
         echo "Jumlah Paslon sebanyak : $count Orang\n";
 
         foreach ($langis as $index => $data) {
-            $lokasi = Lokasi::where('nm_desa', $data->desa)->first();
-            $jlh_dpt = $lokasi ? $lokasi->jlh_DPT : 0;
+            // $lokasi = Lokasi::where('nm_desa', $data->desa)->first();
+            // $jlh_dpt = $lokasi ? $lokasi->jlh_DPT : 0;
             $total_suara = $data->tps_1 + $data->tps_2 + $data->tps_3 + $data->tps_4 + $data->tps_5 + $data->tps_6 + $data->tps_7 + $data->tps_8 + $data->tps_9 + $data->tps_10 + $data->tps_11 + $data->tps_12;
-            $existingDataInDesa = Desa::where('desa', $data->desa)->where('caleg', $data->nm_caleg)->first();
+            $total_suara_desa = $langis->where('desa', $data->desa)->sum('jlh_suara');
+            $existingDataInDesa = Rekap_desa::where('desa', $data->desa)->where('caleg', $data->nm_caleg)->first();
             if (!$existingDataInDesa) {
-                Desa::create([
+                Rekap_desa::create([
                     'caleg' => $data->nm_caleg,
                     'partai' => $data->nm_partai,
                     'desa' => $data->desa,
                     'dapil' => $data->dapil,
                     'suara' => $total_suara,
-                    'jlh_dpt' => $jlh_dpt,
+                    'jlh_pemilih' => $total_suara_desa
                 ]);
             } else {
                 $existingDataInDesa->suara = $total_suara;
-                $existingDataInDesa->jlh_dpt = $jlh_dpt;
+                $existingDataInDesa->jlh_pemilih = $total_suara_desa;
                 $existingDataInDesa->save();
             }
         }
@@ -172,7 +176,7 @@ class RekapDapil2Controller extends Controller
 
     public function rekapIyok (Request $request) {
 
-        $desa = Desa::inRandomOrder()->get();
+        $desa = Rekap_desa::inRandomOrder()->get();
         $iyoks = Ds2_Iyok::inRandomOrder()->get();
 
         $count = count($iyoks);
@@ -180,22 +184,23 @@ class RekapDapil2Controller extends Controller
         echo "Jumlah Paslon sebanyak : $count Orang\n";
 
         foreach ($iyoks as $index => $data) {
-            $lokasi = Lokasi::where('nm_desa', $data->desa)->first();
-            $jlh_dpt = $lokasi ? $lokasi->jlh_DPT : 0;
+            // $lokasi = Lokasi::where('nm_desa', $data->desa)->first();
+            // $jlh_dpt = $lokasi ? $lokasi->jlh_DPT : 0;
             $total_suara = $data->tps_1 + $data->tps_2 + $data->tps_3 + $data->tps_4 + $data->tps_5 + $data->tps_6 + $data->tps_7 + $data->tps_8 + $data->tps_9 + $data->tps_10 + $data->tps_11 + $data->tps_12;
-            $existingDataInDesa = Desa::where('desa', $data->desa)->where('caleg', $data->nm_caleg)->first();
+            $total_suara_desa = $iyoks->where('desa', $data->desa)->sum('jlh_suara');
+            $existingDataInDesa = Rekap_desa::where('desa', $data->desa)->where('caleg', $data->nm_caleg)->first();
             if (!$existingDataInDesa) {
-                Desa::create([
+                Rekap_desa::create([
                     'caleg' => $data->nm_caleg,
                     'partai' => $data->nm_partai,
                     'desa' => $data->desa,
                     'dapil' => $data->dapil,
                     'suara' => $total_suara,
-                    'jlh_dpt' => $jlh_dpt,
+                    'jlh_pemilih' => $total_suara_desa
                 ]);
             } else {
                 $existingDataInDesa->suara = $total_suara;
-                $existingDataInDesa->jlh_dpt = $jlh_dpt;
+                $existingDataInDesa->jlh_pemilih = $total_suara_desa;
                 $existingDataInDesa->save();
             }
         }
@@ -207,7 +212,7 @@ class RekapDapil2Controller extends Controller
 
     public function rekapBolit (Request $request) {
 
-        $desa = Desa::inRandomOrder()->get();
+        $desa = Rekap_desa::inRandomOrder()->get();
         $bolits = Ds2_Bolangitang::inRandomOrder()->get();
 
         $count = count($bolits);
@@ -215,22 +220,24 @@ class RekapDapil2Controller extends Controller
         echo "Jumlah Paslon sebanyak : $count Orang\n";
 
         foreach ($bolits as $index => $data) {
-            $lokasi = Lokasi::where('nm_desa', $data->desa)->first();
-            $jlh_dpt = $lokasi ? $lokasi->jlh_DPT : 0;
+            // $lokasi = Lokasi::where('nm_desa', $data->desa)->first();
+            //$jlh_dpt = $lokasi ? $lokasi->jlh_DPT : 0;
             $total_suara = $data->tps_1 + $data->tps_2 + $data->tps_3 + $data->tps_4 + $data->tps_5 + $data->tps_6 + $data->tps_7 + $data->tps_8 + $data->tps_9 + $data->tps_10 + $data->tps_11 + $data->tps_12;
-            $existingDataInDesa = Desa::where('desa', $data->desa)->where('caleg', $data->nm_caleg)->first();
+            $total_suara_desa = $bolits->where('desa', $data->desa)->sum('jlh_suara');
+
+            $existingDataInDesa = Rekap_desa::where('desa', $data->desa)->where('caleg', $data->nm_caleg)->first();
             if (!$existingDataInDesa) {
-                Desa::create([
+                Rekap_desa::create([
                     'caleg' => $data->nm_caleg,
                     'partai' => $data->nm_partai,
                     'desa' => $data->desa,
                     'dapil' => $data->dapil,
                     'suara' => $total_suara,
-                    'jlh_dpt' => $jlh_dpt,
+                    'jlh_pemilih' => $total_suara_desa
                 ]);
             } else {
                 $existingDataInDesa->suara = $total_suara;
-                $existingDataInDesa->jlh_dpt = $jlh_dpt;
+                $existingDataInDesa->jlh_pemilih = $total_suara_desa;
                 $existingDataInDesa->save();
             }
         }
@@ -239,5 +246,7 @@ class RekapDapil2Controller extends Controller
             'data' => "Jumlah Caleg sebanyak: $count orang",
         ]);
     }
+
+
 
 }

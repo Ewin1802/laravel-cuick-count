@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         \App\Models\User::create([
             'name' => 'Admin Ewin',
             'email' => 'ewin@fic10.com',
-            'password' => Hash::make('12345678'),
+            'password' => Hash::make('11111111'),
             'roles' => 'ADMIN',
             'phone' => '081340985993',
         ]);

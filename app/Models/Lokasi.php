@@ -21,8 +21,5 @@ class Lokasi extends Model
     {
         return $this->hasMany(Pemungutan::class);
     }
-    public function desa()
-    {
-        return $this->hasMany(Desa::class);
-    }
+
 }
