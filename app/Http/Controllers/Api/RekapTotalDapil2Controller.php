@@ -93,7 +93,7 @@ class RekapTotalDapil2Controller extends Controller
 
     $count = count($dapil2);
 
-    echo "Jumlah Caleg sebanyak : $count Orang\n";
+    // echo "Jumlah Caleg sebanyak : $count Orang\n";
 
     foreach ($rekapdesa as $index => $data) {
         $total_suara_desa = Rekap_desa::where('dapil', $data->dapil)->sum('suara');
