@@ -64,7 +64,7 @@ class RekapDapil2Controller extends Controller
 
     $count = count($sonuos);
 
-    echo "Jumlah Paslon sebanyak : $count Orang\n";
+    // echo "Jumlah Paslon sebanyak : $count Orang\n";
 
     foreach ($sonuos as $index => $data) {
 
@@ -170,9 +170,15 @@ class RekapDapil2Controller extends Controller
                 $existingDataInDesa->save();
             }
         }
+        // Mengambil data terbaru dari tabel Rekap_desa
+        $updatedData = Rekap_desa::all();
+
         return response()->json([
-            'message' => 'Data Caleg berhasil Di Create pada Tabel Desa',
-            'data' => "Jumlah Caleg sebanyak: $count orang",
+            'message' => 'Data Caleg berhasil Di Create/Update pada Tabel Desa',
+            'data' => [
+                'jumlah_caleg' => $count,
+                'updated_data' => $updatedData
+            ]
         ]);
     }
 
@@ -206,9 +212,15 @@ class RekapDapil2Controller extends Controller
                 $existingDataInDesa->save();
             }
         }
+        // Mengambil data terbaru dari tabel Rekap_desa
+        $updatedData = Rekap_desa::all();
+
         return response()->json([
-            'message' => 'Data Caleg berhasil Di Create pada Tabel Desa',
-            'data' => "Jumlah Caleg sebanyak: $count orang",
+            'message' => 'Data Caleg berhasil Di Create/Update pada Tabel Desa',
+            'data' => [
+                'jumlah_caleg' => $count,
+                'updated_data' => $updatedData
+            ]
         ]);
     }
 
@@ -243,9 +255,15 @@ class RekapDapil2Controller extends Controller
                 $existingDataInDesa->save();
             }
         }
+        // Mengambil data terbaru dari tabel Rekap_desa
+        $updatedData = Rekap_desa::all();
+
         return response()->json([
-            'message' => 'Data Caleg berhasil Di Create pada Tabel Desa',
-            'data' => "Jumlah Caleg sebanyak: $count orang",
+            'message' => 'Data Caleg berhasil Di Create/Update pada Tabel Desa',
+            'data' => [
+                'jumlah_caleg' => $count,
+                'updated_data' => $updatedData
+            ]
         ]);
     }
 
