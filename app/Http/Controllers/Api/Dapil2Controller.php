@@ -59,26 +59,26 @@ class Dapil2Controller extends Controller
 
     //create Paslon
     public function createPaslon(Request $request)
-    {
-        $paslons = Paslon::inRandomOrder()->get();
-        $sonuos = Ds2_Sonuo::inRandomOrder()->get();
-        $jbs = Ds2_Jambusarang::inRandomOrder()->get();
-        $langis = Ds2_Langi::inRandomOrder()->get();
-        $iyoks = Ds2_Iyok::inRandomOrder()->get();
-        $bolit = Ds2_Bolangitang::inRandomOrder()->get();
+{
+    $paslons = Paslon::inRandomOrder()->get();
+    $sonuos = Ds2_Sonuo::inRandomOrder()->get();
+    $jbs = Ds2_Jambusarang::inRandomOrder()->get();
+    $langis = Ds2_Langi::inRandomOrder()->get();
+    $iyoks = Ds2_Iyok::inRandomOrder()->get();
+    $bolit = Ds2_Bolangitang::inRandomOrder()->get();
 
-        $count_paslons = count($paslons);
+    $count_paslons = count($paslons);
 
-        $count_sonuos = count($sonuos);
-        $count_jambusarangs = count($jbs);
-        $count_langis = count($langis);
-        $count_iyoks = count($iyoks);
-        $count_bolits = count($bolit);
-        $counts = min($count_sonuos, $count_jambusarangs, $count_langis, $count_iyoks, $count_bolits);
-        echo "Jumlah Paslon sebanyak : $count_paslons Orang\n";
+    $count_sonuos = count($sonuos);
+    $count_jambusarangs = count($jbs);
+    $count_langis = count($langis);
+    $count_iyoks = count($iyoks);
+    $count_bolits = count($bolit);
+    $counts = min($count_sonuos, $count_jambusarangs, $count_langis, $count_iyoks, $count_bolits);
+    echo "Jumlah Paslon sebanyak : $count_paslons Orang\n";
 
-        if ($counts === 0) {
-            foreach ($paslons as $index => $paslon) {
+    if ($counts === 0) {
+        foreach ($paslons as $index => $paslon) {
             // Periksa apakah tabel Sonuo dengan "nm_caleg" yang sama sudah ada
             $existingSonuo = Ds2_Sonuo::where('nm_caleg', $paslon->nama_paslon)->first();
             // Jika rekaman tabel Sonuo dengan "nm_caleg" yang sama tidak ada, eksekusi perintah berdasarkan nama paslon
@@ -117,17 +117,23 @@ class Dapil2Controller extends Controller
                     'nm_partai' => $paslon->nama_partai,
                 ]);
             }
+        }
 
-        }
-        } else {
-                $error;
-        }
+        // Mengambil seluruh data paslon dari tabel Paslon
+        $allPaslonsData = $paslons->toArray();
 
         return response()->json([
             'message' => 'Data Paslon berhasil dibuat',
-            'data' => "Jumlah Paslon sebanyak: $count_paslons orang",
+            'data' => [
+                'jumlah_paslons' => $count_paslons,
+                'all_paslons_data' => $allPaslonsData
+            ],
         ]);
+    } else {
+        $error;
     }
+}
+
 
 
 
