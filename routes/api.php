@@ -56,12 +56,11 @@ Route::apiResource('bolangitang', \App\Http\Controllers\Api\dapil2\PaslonBolangi
 Route::put('/updatebolangitang', [UpdateDesaController::class, 'updatebolangitang'])->middleware('auth:sanctum');
 
 
+//post rekap desa Sonuo
+Route::put('/rekap-sonuo', [RekapDapil2Controller::class, 'rekapSonuo'])->middleware('auth:sanctum');
 
 //post rekap desa jbs
 Route::post('/rekap-jbs', [RekapDapil2Controller::class, 'rekapJbs'])->middleware('auth:sanctum');
-
-//post rekap desa Sonuo
-Route::post('/rekap-sonuo', [RekapDapil2Controller::class, 'rekapSonuo'])->middleware('auth:sanctum');
 
 //post rekap desa Langi
 Route::post('/rekap-langi', [RekapDapil2Controller::class, 'rekapLangi'])->middleware('auth:sanctum');

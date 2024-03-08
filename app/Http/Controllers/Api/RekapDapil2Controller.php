@@ -67,11 +67,7 @@ class RekapDapil2Controller extends Controller
         echo "Jumlah Paslon sebanyak : $count Orang\n";
 
         foreach ($sonuos as $index => $data) {
-            // Cari nilai 'jlh_pemilih' dari tabel Lokasi berdasarkan 'desa'
-            // $lokasi = Lokasi::where('nm_desa', $data->desa)->first();
-            // $jlh_dpt = $lokasi ? $lokasi->jlh_DPT : 0;
 
-            // Hitung total suara dari kolom tps_1, tps_2, dan tps_3
             $total_suara = $data->tps_1 + $data->tps_2 + $data->tps_3 + $data->tps_4 + $data->tps_5 + $data->tps_6 + $data->tps_7 + $data->tps_8 + $data->tps_9 + $data->tps_10 + $data->tps_11 + $data->tps_12;
 
             $total_suara_desa = $sonuos->where('desa', $data->desa)->sum('jlh_suara');
