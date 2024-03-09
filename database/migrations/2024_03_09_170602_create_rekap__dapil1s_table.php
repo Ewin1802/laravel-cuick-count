@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rekap__dapil2s', function (Blueprint $table) {
+        Schema::create('rekap__dapil1s', function (Blueprint $table) {
             $table->id();
-            $table->string('nm_paslon')->constrained('caleg')->on('rekap_desa_dapil2s');
-            $table->string('dapil')->constrained('dapil')->on('rekap_desa_dapil2s');
+            $table->string('nm_paslon')->constrained('caleg')->on('rekap_desa_dapil1s');
+            $table->string('dapil')->constrained('dapil')->on('rekap_desa_dapil1s');
             $table->integer('jlh_pemilih')->nullable();
             $table->integer('jlh_suara')->nullable();
             $table->enum('validateds', ['ya', 'tidak'])->default('tidak');
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rekap__dapil2s');
+        Schema::dropIfExists('rekap__dapil1s');
     }
 };

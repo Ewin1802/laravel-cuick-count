@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\RekapDapil2Controller;
+use App\Http\Controllers\RekapDapil2Controller;
 use App\Models\Rekap_Dapil2;
-use App\Models\Rekap_desa;
+use App\Models\Rekap_desa_dapil2;
 
 class RekapTotalDapil2Controller extends Controller
 {
@@ -89,15 +89,15 @@ class RekapTotalDapil2Controller extends Controller
     public function rekaptotaldapil2(Request $request)
 {
     $dapil2 = Rekap_Dapil2::inRandomOrder()->get();
-    $rekapdesa = Rekap_desa::inRandomOrder()->get();
+    $rekapdesa = Rekap_desa_dapil2::inRandomOrder()->get();
 
     $count = count($dapil2);
 
     // echo "Jumlah Caleg sebanyak : $count Orang\n";
 
     foreach ($rekapdesa as $index => $data) {
-        $total_suara_desa = Rekap_desa::where('dapil', $data->dapil)->sum('suara');
-        $total_suara_paslon = Rekap_desa::where('caleg', $data->caleg)->sum('suara');
+        $total_suara_desa = Rekap_desa_dapil2::where('dapil', $data->dapil)->sum('suara');
+        $total_suara_paslon = Rekap_desa_dapil2::where('caleg', $data->caleg)->sum('suara');
 
         $existingDataInDesa = Rekap_Dapil2::where('nm_paslon', $data->caleg)->where('dapil', $data->dapil)->first();
 

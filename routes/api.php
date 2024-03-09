@@ -3,9 +3,13 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\Dapil2Controller;
+use App\Http\Controllers\Api\CreatePaslonDapil2Controller;
+use App\Http\Controllers\Api\CreatePaslonDapil1Controller;
+use App\Http\Controllers\Api\RekapDapil1Controller;
 use App\Http\Controllers\Api\RekapDapil2Controller;
-use App\Http\Controllers\Api\UpdateDesaController;
+use App\Http\Controllers\Api\UpdateDesaDapil1Controller;
+use App\Http\Controllers\Api\UpdateDesaDapil2Controller;
+use App\Http\Controllers\Api\RekapTotalDapil1Controller;
 use App\Http\Controllers\Api\RekapTotalDapil2Controller;
 
 /*
@@ -32,30 +36,43 @@ Route::post('/login', [AuthController::class, 'login']);
 //logout
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
-//create caleg
-Route::post('/create-dapil2', [Dapil2Controller::class, 'createPaslon'])->middleware('auth:sanctum');
+//create caleg dapil 1
+Route::post('/create-dapil1', [CreatePaslonDapil1Controller::class, 'createPaslon'])->middleware('auth:sanctum');
 
+//create caleg dapil 2
+Route::post('/create-dapil2', [CreatePaslonDapil2Controller::class, 'createPaslon'])->middleware('auth:sanctum');
+
+
+//=====================DAPIL I ---- SHOW ALL & UPDATE DATA
+//Desa Kayuogu
+Route::apiResource('kayuogu', \App\Http\Controllers\Api\dapil1\PaslonKayuoguController::class)->middleware('auth:sanctum'); //get paslon sonuo
+Route::put('/updatekayuogu', [UpdateDesaDapil1Controller::class, 'updatekayuogu'])->middleware('auth:sanctum'); //update data suara paslon di desa sonuo
+
+
+//=====================DAPIL II ---- SHOW ALL & UPDATE DATA
 //Desa Sonuo
 Route::apiResource('sonuo', \App\Http\Controllers\Api\dapil2\PaslonSonuoController::class)->middleware('auth:sanctum'); //get paslon sonuo
-Route::put('/updatesonuo', [UpdateDesaController::class, 'updatesonuo'])->middleware('auth:sanctum'); //update data suara paslon di desa sonuo
-
+Route::put('/updatesonuo', [UpdateDesaDapil2Controller::class, 'updatesonuo'])->middleware('auth:sanctum'); //update data suara paslon di desa sonuo
 //Desa Langi
 Route::apiResource('langi', \App\Http\Controllers\Api\dapil2\PaslonLangiController::class)->middleware('auth:sanctum');
-Route::put('/updatelangi', [UpdateDesaController::class, 'updatelangi'])->middleware('auth:sanctum');
-
+Route::put('/updatelangi', [UpdateDesaDapil2Controller::class, 'updatelangi'])->middleware('auth:sanctum');
 //Desa Jambusarang
 Route::apiResource('jambusarang', \App\Http\Controllers\Api\dapil2\PaslonJambusarangController::class)->middleware('auth:sanctum');
-Route::put('/updatejbs', [UpdateDesaController::class, 'updatejbs'])->middleware('auth:sanctum');
-
+Route::put('/updatejbs', [UpdateDesaDapil2Controller::class, 'updatejbs'])->middleware('auth:sanctum');
 //Desa Iyok
 Route::apiResource('iyok', \App\Http\Controllers\Api\dapil2\PaslonIyokController::class)->middleware('auth:sanctum');
-Route::put('/updateiyok', [UpdateDesaController::class, 'updateiyok'])->middleware('auth:sanctum');
-
+Route::put('/updateiyok', [UpdateDesaDapil2Controller::class, 'updateiyok'])->middleware('auth:sanctum');
 //Desa Bolangitang
 Route::apiResource('bolangitang', \App\Http\Controllers\Api\dapil2\PaslonBolangitangController::class)->middleware('auth:sanctum');
-Route::put('/updatebolangitang', [UpdateDesaController::class, 'updatebolangitang'])->middleware('auth:sanctum');
+Route::put('/updatebolangitang', [UpdateDesaDapil2Controller::class, 'updatebolangitang'])->middleware('auth:sanctum');
 
 
+//=====================================DAPIL I
+//post rekap desa kAYUOGU
+Route::put('/rekap-kayuogu', [RekapDapil1Controller::class, 'rekapKayuogu'])->middleware('auth:sanctum');
+
+
+//=====================================DAPIL II
 //post rekap desa Sonuo
 Route::put('/rekap-sonuo', [RekapDapil2Controller::class, 'rekapSonuo'])->middleware('auth:sanctum');
 
@@ -72,8 +89,9 @@ Route::put('/rekap-iyok', [RekapDapil2Controller::class, 'rekapIyok'])->middlewa
 Route::put('/rekap-bolit', [RekapDapil2Controller::class, 'rekapBolit'])->middleware('auth:sanctum');
 
 
-
-//put rekap total
+//put rekap total DAPIL I
+Route::put('/rekap-totaldapil1', [RekapTotalDapil1Controller::class, 'rekaptotaldapil1'])->middleware('auth:sanctum');
+//put rekap total DAPIL II
 Route::put('/rekap-totaldapil2', [RekapTotalDapil2Controller::class, 'rekaptotaldapil2'])->middleware('auth:sanctum');
 
 // //Resgister

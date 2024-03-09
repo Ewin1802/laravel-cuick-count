@@ -13,7 +13,7 @@ use App\Models\Bolbar\Ds2_Bolangitang;
 
 
 
-class UpdateDesaController extends Controller
+class UpdateDesaDapil2Controller extends Controller
 {
     public function updatesonuo(Request $request)
     {

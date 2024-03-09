@@ -10,12 +10,8 @@ use App\Models\Bolbar\Ds2_Jambusarang;
 use App\Models\Bolbar\Ds2_Langi;
 use App\Models\Bolbar\Ds2_Iyok;
 use App\Models\Bolbar\Ds2_Bolangitang;
-use App\Models\Pemungutan;
-use App\Models\Desa;
-use App\Http\Requests\StorePaslonRequest;
-use App\Http\Resources\PemungutanResource;
 
-class Dapil2Controller extends Controller
+class CreatePaslonDapil2Controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -75,9 +71,10 @@ class Dapil2Controller extends Controller
     $count_iyoks = count($iyoks);
     $count_bolits = count($bolit);
     $counts = min($count_sonuos, $count_jambusarangs, $count_langis, $count_iyoks, $count_bolits);
-    echo "Jumlah Paslon sebanyak : $count_paslons Orang\n";
+    // echo "Jumlah Paslon sebanyak : $count_paslons Orang\n";
 
     if ($counts === 0) {
+
         foreach ($paslons as $index => $paslon) {
             // Periksa apakah tabel Sonuo dengan "nm_caleg" yang sama sudah ada
             $existingSonuo = Ds2_Sonuo::where('nm_caleg', $paslon->nama_paslon)->first();
@@ -125,46 +122,21 @@ class Dapil2Controller extends Controller
         return response()->json([
             'message' => 'Data Paslon berhasil dibuat',
             'data' => [
-                'jumlah_paslons' => $count_paslons,
+                'jumlah_paslons' => count($allPaslonsData),
                 'all_paslons_data' => $allPaslonsData
             ],
         ]);
     } else {
-        $error;
+        $allPaslonsData = $paslons->toArray();
+        return response()->json([
+            'message' => 'Paslon sudah ada dalam masing-masing tabel desa',
+            'data' => [
+                'jumlah_paslons' => count($allPaslonsData),
+                'all_paslons_data' => $allPaslonsData
+            ],
+        ]);
     }
 }
 
 
-
-
-    public function getCalegByDapil(Request $request)
-    {
-
-        $validatedData = $request->validate([
-            'nm_caleg' => 'required',
-        ]);
-
-       $sonuos = Ds2_Sonuo::where('nm_caleg', $validatedData['nm_caleg'])->first();
-        if (!$sonuos) {
-            return response()->json([
-                'message' => 'Caleg tidak ditemukan',
-                'data' => [],
-            ], 200);
-        }
-        $pemungutans = Pemungutan::where('nm_paslon', $validatedData['nm_caleg'])->get();
-        // $soalIds = $ujianSoalList->pluck('soal_id');
-        if (!$sonuos) {
-            return response()->json([
-                'message' => 'Paslon tidak ditemukan',
-                'data' => [],
-            ], 200);
-        }
-        // $pemungutans = Pemungutan::where('nm_paslon', $paslons->id)->get();
-        // $caleg= Paslon::whereIn('id', $pemungutans)->where('nm_paslon', $request->nm_paslon)->get();
-
-        return response()->json([
-            'message' => 'Berhasil mendapatkan Caleg',
-            'data' => PemungutanResource::collection($pemungutans),
-        ]);
-    }
 }

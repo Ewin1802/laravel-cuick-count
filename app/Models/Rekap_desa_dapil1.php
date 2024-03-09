@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rekap_desa extends Model
+class Rekap_desa_dapil1 extends Model
 {
     use HasFactory;
     protected $fillable = [
