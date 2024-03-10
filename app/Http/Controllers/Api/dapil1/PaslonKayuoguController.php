@@ -11,7 +11,7 @@ class PaslonKayuoguController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $paslons = \App\Models\Pinogaluman\Ds1_Kayuogu::when($request->id, function($query, $id){
             return $query->where('id', $id);
