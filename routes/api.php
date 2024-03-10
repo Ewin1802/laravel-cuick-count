@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\UpdateDesaDapil3Controller;
 use App\Http\Controllers\Api\RekapTotalDapil1Controller;
 use App\Http\Controllers\Api\RekapTotalDapil2Controller;
 use App\Http\Controllers\Api\RekapTotalDapil3Controller;
+use App\Http\Controllers\Api\RekapKeseluruhanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,6 +112,10 @@ Route::put('/rekap-totaldapil1', [RekapTotalDapil1Controller::class, 'rekaptotal
 Route::put('/rekap-totaldapil2', [RekapTotalDapil2Controller::class, 'rekaptotaldapil2'])->middleware('auth:sanctum');
 //put rekap total DAPIL III
 Route::put('/rekap-totaldapil3', [RekapTotalDapil3Controller::class, 'rekaptotaldapil3'])->middleware('auth:sanctum');
+
+//put rekap total DAPIL III
+Route::put('/rekap-all', [RekapKeseluruhanController::class, 'rekapAll'])->middleware('auth:sanctum');
+
 
 // //Resgister
 // Route::post('/register', [AuthController::class, 'register']);
