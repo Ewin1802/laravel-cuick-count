@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Paslon;
 use App\Models\Pinogaluman\Ds1_Kayuogu;
+use App\Models\Kaidipang\Ds1_Bigo;
 
 class CreatePaslonDapil1Controller extends Controller
 {
@@ -54,19 +55,20 @@ class CreatePaslonDapil1Controller extends Controller
      {
          $paslons = Paslon::inRandomOrder()->get();
          $kayuogus = Ds1_Kayuogu::inRandomOrder()->get();
-
+         $bigos = Ds1_Bigo::inRandomOrder()->get();
 
          $count_paslons = count($paslons);
 
          $count_kayuogus = count($kayuogus);
+         $count_bigos = count($bigos);
         //  $count_jambusarangs = count($jbs);
         //  $count_langis = count($langis);
         //  $count_iyoks = count($iyoks);
         //  $count_bolits = count($bolit);
-        //   $counts = min($count_kayuogus);
+        $counts = min($count_kayuogus, $count_bigos);
 
 
-         if ($count_kayuogus === 0) {
+         if ($counts === 0) {
 
              foreach ($paslons as $index => $paslon) {
                  // Periksa apakah tabel Sonuo dengan "nm_caleg" yang sama sudah ada
@@ -79,13 +81,13 @@ class CreatePaslonDapil1Controller extends Controller
                      ]);
                  }
 
-                //  $existingJambusarang = Ds2_Jambusarang::where('nm_caleg', $paslon->nama_paslon)->first();
-                //  if (!$existingJambusarang) {
-                //      Ds2_Jambusarang::create([
-                //          'nm_caleg' => $paslon->nama_paslon,
-                //          'nm_partai' => $paslon->nama_partai,
-                //      ]);
-                //  }
+                 $existingBigo = Ds1_Bigo::where('nm_caleg', $paslon->nama_paslon)->first();
+                 if (!$existingBigo) {
+                     Ds1_Bigo::create([
+                         'nm_caleg' => $paslon->nama_paslon,
+                         'nm_partai' => $paslon->nama_partai,
+                     ]);
+                 }
 
              }
 

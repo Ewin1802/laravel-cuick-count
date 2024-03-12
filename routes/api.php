@@ -52,9 +52,12 @@ Route::post('/create-dapil3', [CreatePaslonDapil3Controller::class, 'createPaslo
 
 
 //=====================DAPIL I ---- SHOW ALL & UPDATE DATA
-//Desa Kayuogu
-Route::apiResource('kayuogu', \App\Http\Controllers\Api\dapil1\PaslonKayuoguController::class)->middleware('auth:sanctum'); //get paslon sonuo
-Route::put('/updatekayuogu', [UpdateDesaDapil1Controller::class, 'updatekayuogu'])->middleware('auth:sanctum'); //update data suara paslon di desa sonuo
+//Desa Kayuogu - PINOGALUMAN
+Route::apiResource('kayuogu', \App\Http\Controllers\Api\dapil1\PaslonKayuoguController::class)->middleware('auth:sanctum');
+Route::put('/updatekayuogu', [UpdateDesaDapil1Controller::class, 'updatekayuogu'])->middleware('auth:sanctum');
+//Desa Bigo - KAIDIPANG
+Route::apiResource('bigo', \App\Http\Controllers\Api\dapil1\PaslonBigoController::class)->middleware('auth:sanctum');
+Route::put('/updatebigo', [UpdateDesaDapil1Controller::class, 'updatebigo'])->middleware('auth:sanctum');
 
 
 //=====================DAPIL II ---- SHOW ALL & UPDATE DATA
@@ -82,8 +85,10 @@ Route::put('/updatekuhanga', [UpdateDesaDapil3Controller::class, 'updatekuhanga'
 
 
 //=====================================DAPIL I
-//post rekap desa kAYUOGU
+//post rekap desa Kayuogu - Pinogaluman
 Route::put('/rekap-kayuogu', [RekapDapil1Controller::class, 'rekapKayuogu'])->middleware('auth:sanctum');
+//post rekap desa Bigo - Kaidipang
+Route::put('/rekap-bigo', [RekapDapil1Controller::class, 'rekapBigo'])->middleware('auth:sanctum');
 
 //=====================================DAPIL II
 //post rekap desa Sonuo
