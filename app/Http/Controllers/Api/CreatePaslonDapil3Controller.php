@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Paslon;
 use App\Models\Bintauna\Ds3_Kuhanga;
+use App\Models\Sangkub\Ds3_Busisingo;
 
 class CreatePaslonDapil3Controller extends Controller
 {
@@ -54,11 +55,13 @@ class CreatePaslonDapil3Controller extends Controller
     {
         $paslons = Paslon::inRandomOrder()->get();
         $kuhangas = Ds3_Kuhanga::inRandomOrder()->get();
-
+        $busisingos = Ds3_Busisingo::inRandomOrder()->get();
 
         $count_paslons = count($paslons);
 
         $count_kuhangas = count($kuhangas);
+        $count_busisingos = count($busisingos);
+        $counts = min($count_kuhangas, $count_busisingos);
        //  $count_jambusarangs = count($jbs);
        //  $count_langis = count($langis);
        //  $count_iyoks = count($iyoks);
@@ -66,7 +69,7 @@ class CreatePaslonDapil3Controller extends Controller
        //   $counts = min($count_kayuogus);
 
 
-        if ($count_kuhangas === 0) {
+        if ($counts === 0) {
 
             foreach ($paslons as $index => $paslon) {
                 // Periksa apakah tabel Sonuo dengan "nm_caleg" yang sama sudah ada
@@ -79,13 +82,13 @@ class CreatePaslonDapil3Controller extends Controller
                     ]);
                 }
 
-               //  $existingJambusarang = Ds2_Jambusarang::where('nm_caleg', $paslon->nama_paslon)->first();
-               //  if (!$existingJambusarang) {
-               //      Ds2_Jambusarang::create([
-               //          'nm_caleg' => $paslon->nama_paslon,
-               //          'nm_partai' => $paslon->nama_partai,
-               //      ]);
-               //  }
+                $existingBusisingo = Ds3_Busisingo::where('nm_caleg', $paslon->nama_paslon)->first();
+                 if (!$existingBusisingo) {
+                    Ds3_Busisingo::create([
+                         'nm_caleg' => $paslon->nama_paslon,
+                         'nm_partai' => $paslon->nama_partai,
+                     ]);
+                 }
 
             }
 

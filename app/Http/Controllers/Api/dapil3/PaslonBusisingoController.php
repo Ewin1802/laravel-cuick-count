@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\dapil3;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PaslonKuhangaController extends Controller
+class PaslonBusisingoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class PaslonKuhangaController extends Controller
     public function index(Request $request)
     {
         //ambil semua atau berdasarkan id
-        $paslons = \App\Models\Bintauna\Ds3_Kuhanga::when($request->id, function($query, $id){
+        $paslons = \App\Models\Sangkub\Ds3_Busisingo::when($request->id, function($query, $id){
             return $query->where('id', $id);
         })->get();
 
