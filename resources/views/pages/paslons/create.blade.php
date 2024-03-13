@@ -36,17 +36,10 @@
 
 
                         <div class="card-body">
-                            <form action="{{ route('paslon.store') }}" method="POST">
+                            <form action="{{ route('paslon.store') }}" method="POST" enctype="multipart/form-data">
 
                                 @csrf
-                                {{-- <div class="form-group">
-                                    <label for="nama_partai">Nomor Partai</label>
-                                    <select name="nama_partai" class="form-control">
-                                        @foreach ($nm_partai as $number)
-                                            <option value="{{$number['nama_partai']}}">{{$number['nm_partai']}}</option>
-                                        @endforeach
-                                    </select>
-                                </div> --}}
+
                                 <div class="form-group">
                                     <label for="nama_partai">Pilih Partai:</label>
                                     <select name="nama_partai" id="nama_partai" class="form-control">
@@ -86,10 +79,15 @@
                                     @enderror
                                 </div>
 
-                                {{-- <div class="row justify-content-center">
-                                <a href="{{ route('paslon.index')}}" class="btn btn-primary bg-danger">Return</a>&nbsp;&nbsp;
-                                <button type="submit" class="btn btn-primary text-center bg-success">Save Details</button>
+                                {{-- <div class="form-group">
+                                    <label for="foto_paslon">Upload Foto</label>
+                                    <input type="file" class="form-control-file" id="foto_paslon" name="foto_paslon">
                                 </div> --}}
+
+                                <div class="form-group">
+                                    <label for="foto_paslon">Upload Foto</label>
+                                    <input type="file" class="form-control-file" id="foto_paslon" name="foto_paslon">
+                                </div>
 
                                 <div class="card-footer text-right">
                                     <button class="btn btn-primary">Submit</button>

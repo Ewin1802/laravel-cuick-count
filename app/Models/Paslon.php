@@ -15,7 +15,15 @@ class Paslon extends Model
         'nama_partai',
         'nama_paslon',
         'no_urut',
+        'foto_paslon',
     ];
+
+     // method untuk menyimpan foto
+     public function savePhoto($photo)
+     {
+         $this->foto_paslon = $photo->store('photos', 'public');
+         $this->save();
+     }
 
     // public function partai()
     // {

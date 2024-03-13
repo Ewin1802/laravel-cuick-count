@@ -17,6 +17,7 @@ return new class extends Migration
             // $table->string('nama_partai')->constrained('nm_partai')->on('partais');
             $table->string('nama_paslon');
             $table->string('no_urut');
+            $table->string('foto_paslon')->nullable(); // Menambahkan kolom foto_paslon yang dapat berisi nilai NULL
             $table->timestamps();
         });
     }

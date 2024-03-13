@@ -94,6 +94,7 @@
                                                 {{$paslon->nama_partai}}
                                             </td>
 
+
                                             <td>
                                                 <div class="d-flex left-content-center">
                                                     <a href='{{ route('paslon.edit', $paslon->id) }}'
@@ -113,6 +114,10 @@
                                                     </form>
                                                 </div>
                                             </td>
+                                            {{-- <td>
+                                                {{$paslon->foto_paslon}}
+                                            </td> --}}
+                                            <img src="https://orangsonuo.my.id/images/{{ $paslon->foto_paslon }}" width="100" height="100" alt="Paslon Photo">
                                         </tr>
                                         @endforeach
 

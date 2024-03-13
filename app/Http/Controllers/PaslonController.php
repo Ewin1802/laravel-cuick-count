@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Paslon;
 use App\Models\Partai;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePaslonRequest;
 use App\Http\Requests\UpdatePaslonRequest;
 use App\Http\Requests\StorePartaiRequest;
@@ -32,28 +33,49 @@ class PaslonController extends Controller
         return view('pages.paslons.create');
     }
 
-    public function store(StorePaslonRequest $request, )
+    // public function store(StorePaslonRequest $request, )
+    // {
+
+    //     $data = $request->all();
+    //     $data['password'] = Hash::make($request->password);
+    //     \App\Models\Paslon::create($data);
+    //     return redirect()->route('paslon.index')->with('success', 'Data Caleg successfully created');
+
+    // }
+    public function store(StorePaslonRequest $request)
     {
+        // Validasi request Paslon
+        $validatedData = $request->validate([
+            'nama_paslon' => 'required|string',
+            'no_urut' => 'required|numeric',
+            'nama_partai' => 'required|string',
+            'foto_paslon' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // sesuaikan dengan kebutuhan
+        ]);
 
-        //Validate
-        // $request->validate([
-        //     'nm_partai' => 'required',
-        // ]);
+        // Cek apakah pengguna sudah terotentikasi
+        if (Auth::check()) {
+            // Jika iya, buat Paslon baru
+            $paslon = new Paslon();
+            $paslon->nama_paslon = $validatedData['nama_paslon'];
+            $paslon->no_urut = $validatedData['no_urut'];
+            $paslon->nama_partai = $validatedData['nama_partai'];
 
-        // $paslon = Paslon::create([
-        //     'nama_partai' => $request->nm_partai,
-        //     'nama_paslon' => $request->nama_paslon,
-        //     'no_urut' => $request->no_urut,
-        // ]);
-        // return redirect()->route('paslon.index')->with('success', 'Data Caleg successfully created');
+            // Simpan foto jika ada yang diunggah
+            if ($request->hasFile('foto_paslon')) {
+                $foto = $request->file('foto_paslon');
+                $paslon->savePhoto($foto);
+            }
 
+            $paslon->save();
 
-        $data = $request->all();
-        $data['password'] = Hash::make($request->password);
-        \App\Models\Paslon::create($data); 
-        return redirect()->route('paslon.index')->with('success', 'Data Caleg successfully created');
+            return redirect()->route('paslon.index')->with('success', 'Paslon berhasil ditambahkan');
+        } else {
+            // Jika tidak, redirect ke halaman login
+            return redirect()->route('login')->with('error', 'Anda harus login untuk membuat Paslon baru');
+        }
 
     }
+
 
     public function edit($id)
     {
