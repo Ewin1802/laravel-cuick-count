@@ -33,47 +33,66 @@ class PaslonController extends Controller
         return view('pages.paslons.create');
     }
 
-    // public function store(StorePaslonRequest $request, )
-    // {
 
-    //     $data = $request->all();
-    //     $data['password'] = Hash::make($request->password);
-    //     \App\Models\Paslon::create($data);
-    //     return redirect()->route('paslon.index')->with('success', 'Data Caleg successfully created');
+    // public function store(StorePaslonRequest $request)
+    // {
+    //     // Validasi request Paslon
+    //     $validatedData = $request->validate([
+    //         'nama_paslon' => 'required|string',
+    //         'no_urut' => 'required|numeric',
+    //         'nama_partai' => 'required|string',
+    //         'foto_paslon' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // sesuaikan dengan kebutuhan
+    //     ]);
+
+    //     // Cek apakah pengguna sudah terotentikasi
+    //     if (Auth::check()) {
+    //         // Jika iya, buat Paslon baru
+    //         $paslon = new Paslon();
+    //         $paslon->nama_paslon = $validatedData['nama_paslon'];
+    //         $paslon->no_urut = $validatedData['no_urut'];
+    //         $paslon->nama_partai = $validatedData['nama_partai'];
+
+    //         // Simpan foto jika ada yang diunggah
+    //         if ($request->hasFile('foto_paslon')) {
+    //             $foto = $request->file('foto_paslon');
+    //             $paslon->savePhoto($foto);
+    //         }
+
+    //         $paslon->save();
+
+    //         return redirect()->route('paslon.index')->with('success', 'Paslon berhasil ditambahkan');
+    //     } else {
+    //         // Jika tidak, redirect ke halaman login
+    //         return redirect()->route('login')->with('error', 'Anda harus login untuk membuat Paslon baru');
+    //     }
 
     // }
-    public function store(StorePaslonRequest $request)
+    public function store(Request $request)
     {
-        // Validasi request Paslon
+        // Validasi request
         $validatedData = $request->validate([
+            'nama_partai' => 'required|string',
             'nama_paslon' => 'required|string',
             'no_urut' => 'required|numeric',
-            'nama_partai' => 'required|string',
-            'foto_paslon' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // sesuaikan dengan kebutuhan
+            'foto_paslon' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Cek apakah pengguna sudah terotentikasi
-        if (Auth::check()) {
-            // Jika iya, buat Paslon baru
-            $paslon = new Paslon();
-            $paslon->nama_paslon = $validatedData['nama_paslon'];
-            $paslon->no_urut = $validatedData['no_urut'];
-            $paslon->nama_partai = $validatedData['nama_partai'];
+        // Membuat instance baru dari model Paslon
+        $paslon = new Paslon();
 
-            // Simpan foto jika ada yang diunggah
-            if ($request->hasFile('foto_paslon')) {
-                $foto = $request->file('foto_paslon');
-                $paslon->savePhoto($foto);
-            }
+        // Mengisi atribut model dengan data yang divalidasi
+        $paslon->nama_partai = $validatedData['nama_partai'];
+        $paslon->nama_paslon = $validatedData['nama_paslon'];
+        $paslon->no_urut = $validatedData['no_urut'];
 
-            $paslon->save();
+        // Mendapatkan nama Paslon dari input form atau dari sumber data lainnya
+        $nama_paslon = $request->input('nama_paslon');
+        // Mengasumsikan $nama_paslon berisi nama Paslon
+        $urlFoto = $paslon->savePhoto($request->file('foto_paslon'), $nama_paslon);
 
-            return redirect()->route('paslon.index')->with('success', 'Paslon berhasil ditambahkan');
-        } else {
-            // Jika tidak, redirect ke halaman login
-            return redirect()->route('login')->with('error', 'Anda harus login untuk membuat Paslon baru');
-        }
 
+        // Redirect dengan pesan sukses jika berhasil
+        return redirect()->route('paslon.index')->with('success', 'Paslon berhasil ditambahkan');
     }
 
 

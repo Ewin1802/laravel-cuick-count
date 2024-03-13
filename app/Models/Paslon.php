@@ -18,12 +18,26 @@ class Paslon extends Model
         'foto_paslon',
     ];
 
-     // method untuk menyimpan foto
-     public function savePhoto($photo)
-     {
-         $this->foto_paslon = $photo->store('photos', 'public');
-         $this->save();
-     }
+    public function savePhoto($photo, $nama_paslon)
+    {
+        // Mendapatkan ekstensi file foto
+        $extension = $photo->getClientOriginalExtension();
+
+        // Membuat nama file baru dengan nama paslon dan ekstensi
+        $nama_file = $nama_paslon . '.' . $extension;
+
+        // Menyimpan foto dengan nama file baru ke penyimpanan yang ditentukan
+        $path = $photo->storeAs('photos', $nama_file, 'public');
+
+        // Menyimpan path foto ke atribut foto_paslon pada model
+        $this->foto_paslon = $path;
+        $this->save();
+
+        // Mengembalikan URL lengkap gambar
+        return asset('storage/' . $path);
+    }
+
+
 
     // public function partai()
     // {

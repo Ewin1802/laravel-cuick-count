@@ -71,7 +71,7 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
-                                            {{-- <th>id</th> --}}
+                                            <th>Foto Paslon</th>
                                             <th>Nama Paslon</th>
                                             <th>Nomor Urut Paslon</th>
                                             <th>Partai</th>
@@ -80,9 +80,13 @@
 
                                         @foreach ($paslons as $paslon)
                                         <tr>
-                                            {{-- <td>
-                                                {{$paslon->id}}
-                                            </td> --}}
+                                            <td>
+                                                @if ($paslon->foto_paslon)
+                                                    <img src="{{ asset('storage/' . $paslon->foto_paslon) }}" width="100" height="120" alt="Paslon Photo">
+                                                @else
+                                                    No Image
+                                                @endif
+                                            </td>
 
                                             <td>
                                                 {{$paslon->nama_paslon}}
@@ -114,10 +118,7 @@
                                                     </form>
                                                 </div>
                                             </td>
-                                            {{-- <td>
-                                                {{$paslon->foto_paslon}}
-                                            </td> --}}
-                                            <img src="https://orangsonuo.my.id/images/{{ $paslon->foto_paslon }}" width="100" height="100" alt="Paslon Photo">
+
                                         </tr>
                                         @endforeach
 
