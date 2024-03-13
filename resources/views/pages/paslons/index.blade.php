@@ -17,7 +17,7 @@
                     <a href="{{ route('paslon.create') }}"
                         class="btn btn-primary">Tambah Data</a>
                 </div>
-                <div class="section-header-breadcrumb">
+            <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                     <div class="breadcrumb-item"><a href="#">Data Pemilihan</a></div>
                     <div class="breadcrumb-item">Data Paslon</div>

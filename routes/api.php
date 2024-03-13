@@ -41,6 +41,9 @@ Route::post('/login', [AuthController::class, 'login']);
 //logout
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
+//Paslon
+Route::apiResource('paslons', \App\Http\Controllers\Api\PaslonController::class)->middleware('auth:sanctum');
+
 //create caleg dapil 1
 Route::post('/create-dapil1', [CreatePaslonDapil1Controller::class, 'createPaslon'])->middleware('auth:sanctum');
 

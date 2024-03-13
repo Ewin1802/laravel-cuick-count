@@ -100,7 +100,7 @@ class PaslonController extends Controller
             // Mengasumsikan $nama_paslon berisi nama Paslon
             $urlFoto = $paslon->savePhoto($request->file('foto_paslon'), $nama_paslon);
 
-            
+
         }
 
         // Simpan perubahan pada data Paslon
