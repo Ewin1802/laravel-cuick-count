@@ -82,7 +82,7 @@
                                         <tr>
                                             <td>
                                                 @if ($paslon->foto_paslon)
-                                                    <img src="{{ asset('storage/' . $paslon->foto_paslon) }}" width="100" height="120" alt="Paslon Photo">
+                                                    <img src="{{ asset('storage/' . $paslon->foto_paslon) }}" width="100" height="130" alt="Paslon Photo">
                                                 @else
                                                     No Image
                                                 @endif

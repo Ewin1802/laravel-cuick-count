@@ -8,6 +8,7 @@ use App\Models\Paslon;
 use App\Models\Partai;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StorePaslonRequest;
 use App\Http\Requests\UpdatePaslonRequest;
 use App\Http\Requests\StorePartaiRequest;
@@ -33,40 +34,6 @@ class PaslonController extends Controller
         return view('pages.paslons.create');
     }
 
-
-    // public function store(StorePaslonRequest $request)
-    // {
-    //     // Validasi request Paslon
-    //     $validatedData = $request->validate([
-    //         'nama_paslon' => 'required|string',
-    //         'no_urut' => 'required|numeric',
-    //         'nama_partai' => 'required|string',
-    //         'foto_paslon' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // sesuaikan dengan kebutuhan
-    //     ]);
-
-    //     // Cek apakah pengguna sudah terotentikasi
-    //     if (Auth::check()) {
-    //         // Jika iya, buat Paslon baru
-    //         $paslon = new Paslon();
-    //         $paslon->nama_paslon = $validatedData['nama_paslon'];
-    //         $paslon->no_urut = $validatedData['no_urut'];
-    //         $paslon->nama_partai = $validatedData['nama_partai'];
-
-    //         // Simpan foto jika ada yang diunggah
-    //         if ($request->hasFile('foto_paslon')) {
-    //             $foto = $request->file('foto_paslon');
-    //             $paslon->savePhoto($foto);
-    //         }
-
-    //         $paslon->save();
-
-    //         return redirect()->route('paslon.index')->with('success', 'Paslon berhasil ditambahkan');
-    //     } else {
-    //         // Jika tidak, redirect ke halaman login
-    //         return redirect()->route('login')->with('error', 'Anda harus login untuk membuat Paslon baru');
-    //     }
-
-    // }
     public function store(Request $request)
     {
         // Validasi request
@@ -104,12 +71,43 @@ class PaslonController extends Controller
         return view('pages.paslons.edit', compact('paslon'));
     }
 
-    public function update(UpdatePaslonRequest $request, Paslon $paslon)
+    // public function update(UpdatePaslonRequest $request, Paslon $paslon)
+    public function update(Request $request, Paslon $paslon)
     {
-        $data = $request->validated();
-        $paslon->update($data);
-        return redirect()->route('paslon.index')->with('success', 'Data Caleg successfully updated');
+        // Validasi data yang diterima dari request
+        $validatedData = $request->validate([
+            'nama_partai' => 'required|string',
+            'nama_paslon' => 'required|string',
+            'no_urut' => 'required|numeric',
+            'foto_paslon' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Foto tidak wajib diunggah
+        ]);
+
+        // Mengisi atribut model dengan data yang divalidasi
+        $paslon->nama_partai = $validatedData['nama_partai'];
+        $paslon->nama_paslon = $validatedData['nama_paslon'];
+        $paslon->no_urut = $validatedData['no_urut'];
+
+        if ($request->hasFile('foto_paslon')) {
+            $foto = $request->file('foto_paslon');
+
+            // Jika paslon sudah memiliki foto sebelumnya, hapus foto tersebut
+            if ($paslon->foto_paslon) {
+                Storage::delete($paslon->foto_paslon);
+            }
+
+             // Mendapatkan nama Paslon dari input form atau dari sumber data lainnya
+            $nama_paslon = $request->input('nama_paslon');
+            // Mengasumsikan $nama_paslon berisi nama Paslon
+            $urlFoto = $paslon->savePhoto($request->file('foto_paslon'), $nama_paslon);
+        }
+
+        // Simpan perubahan pada data Paslon
+        $paslon->save();
+
+        // Redirect dengan pesan sukses jika berhasil
+        return redirect()->route('paslon.index')->with('success', 'Paslon berhasil diupdate');
     }
+
 
     public function destroy(Paslon $paslon)
     {

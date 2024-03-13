@@ -25,6 +25,7 @@ class UpdatePaslonRequest extends FormRequest
             'nama_partai' => 'required||max:100|min:1',
             'nama_paslon' => 'required|max:100|min:3',
             'no_urut' => 'required||max:20|min:1',
+            'foto_paslon' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }
