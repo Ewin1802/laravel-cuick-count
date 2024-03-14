@@ -52,10 +52,13 @@ class PaslonController extends Controller
         $paslon->nama_paslon = $validatedData['nama_paslon'];
         $paslon->no_urut = $validatedData['no_urut'];
 
-        // Mendapatkan nama Paslon dari input form atau dari sumber data lainnya
+        // // Mendapatkan nama Paslon dari input form atau dari sumber data lainnya
+        // $nama_paslon = $request->input('nama_paslon');
+        // // Mengasumsikan $nama_paslon berisi nama Paslon
+        // $urlFoto = $paslon->savePhoto($request->file('foto_paslon'), $nama_paslon);
         $nama_paslon = $request->input('nama_paslon');
-        // Mengasumsikan $nama_paslon berisi nama Paslon
-        $urlFoto = $paslon->savePhoto($request->file('foto_paslon'), $nama_paslon);
+        $urlFoto = $paslon->savePhoto($foto, $paslon->nama_paslon);
+        $paslon->foto_paslon = $urlFoto;
 
 
         // Redirect dengan pesan sukses jika berhasil
