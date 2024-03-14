@@ -59,8 +59,11 @@ class PaslonController extends Controller
 
         $foto = $request->file('foto_paslon');
         $nama_paslon = $request->input('nama_paslon');
+        // $urlFoto = $paslon->savePhoto($request->file('foto_paslon'), $nama_paslon);
         $urlFoto = $paslon->savePhoto($foto, $paslon->nama_paslon);
         $paslon->foto_paslon = $urlFoto;
+
+        $paslon->save();
 
 
         // Redirect dengan pesan sukses jika berhasil
