@@ -56,6 +56,8 @@ class PaslonController extends Controller
         // $nama_paslon = $request->input('nama_paslon');
         // // Mengasumsikan $nama_paslon berisi nama Paslon
         // $urlFoto = $paslon->savePhoto($request->file('foto_paslon'), $nama_paslon);
+
+        $foto = $request->file('foto_paslon');
         $nama_paslon = $request->input('nama_paslon');
         $urlFoto = $paslon->savePhoto($foto, $paslon->nama_paslon);
         $paslon->foto_paslon = $urlFoto;
@@ -66,15 +68,7 @@ class PaslonController extends Controller
     }
 
 
-    public function edit($id)
-    {
-        $paslon = \App\Models\Paslon::findOrFail($id);
-        // $partai = \App\Models\Partai::all();
-        // return view('pages.paslons.edit', compact('paslon', 'partai'));
-        return view('pages.paslons.edit', compact('paslon'));
-    }
-
-    // public function update(UpdatePaslonRequest $request, Paslon $paslon)
+        // public function update(UpdatePaslonRequest $request, Paslon $paslon)
     public function update(Request $request, Paslon $paslon)
     {
         // Validasi data yang diterima dari request
@@ -111,6 +105,14 @@ class PaslonController extends Controller
 
         // Redirect dengan pesan sukses jika berhasil
         return redirect()->route('paslon.index')->with('success', 'Paslon berhasil diupdate');
+    }
+
+    public function edit($id)
+    {
+        $paslon = \App\Models\Paslon::findOrFail($id);
+        // $partai = \App\Models\Partai::all();
+        // return view('pages.paslons.edit', compact('paslon', 'partai'));
+        return view('pages.paslons.edit', compact('paslon'));
     }
 
 
