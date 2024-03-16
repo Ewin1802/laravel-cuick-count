@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Paslon;
 use App\Models\Pinogaluman\Ds1_Kayuogu;
+use App\Models\Pinogaluman\Ds1_BatuBantayo;
+use App\Models\Pinogaluman\Ds1_Dalapuli;
 use App\Models\Kaidipang\Ds1_Bigo;
 
 class CreatePaslonDapil1Controller extends Controller
@@ -55,17 +57,18 @@ class CreatePaslonDapil1Controller extends Controller
      {
          $paslons = Paslon::inRandomOrder()->get();
          $kayuogus = Ds1_Kayuogu::inRandomOrder()->get();
+         $batubantayos = Ds1_BatuBantayo::inRandomOrder()->get();
+         $dalapulis = Ds1_Dalapuli::inRandomOrder()->get();
          $bigos = Ds1_Bigo::inRandomOrder()->get();
 
          $count_paslons = count($paslons);
 
          $count_kayuogus = count($kayuogus);
+         $count_batubantayos = count($batubantayos);
+         $count_dalapulis = count($dalapulis);
          $count_bigos = count($bigos);
-        //  $count_jambusarangs = count($jbs);
-        //  $count_langis = count($langis);
-        //  $count_iyoks = count($iyoks);
-        //  $count_bolits = count($bolit);
-        $counts = min($count_kayuogus, $count_bigos);
+
+        $counts = min($count_kayuogus, $count_bigos, $count_batubantayos, $count_dalapulis);
 
 
          if ($counts === 0) {
@@ -76,6 +79,22 @@ class CreatePaslonDapil1Controller extends Controller
                  // Jika rekaman tabel Sonuo dengan "nm_caleg" yang sama tidak ada, eksekusi perintah berdasarkan nama paslon
                  if (!$existingKayuogu) {
                      Ds1_Kayuogu::create([
+                         'nm_caleg' => $paslon->nama_paslon,
+                         'nm_partai' => $paslon->nama_partai,
+                     ]);
+                 }
+
+                 $existingBatuBantayo = Ds1_BatuBantayo::where('nm_caleg', $paslon->nama_paslon)->first();
+                 if (!$existingBatuBantayo) {
+                    Ds1_BatuBantayo::create([
+                         'nm_caleg' => $paslon->nama_paslon,
+                         'nm_partai' => $paslon->nama_partai,
+                     ]);
+                 }
+
+                 $existingDalapuli = Ds1_Dalapuli::where('nm_caleg', $paslon->nama_paslon)->first();
+                 if (!$existingDalapuli) {
+                    Ds1_Dalapuli::create([
                          'nm_caleg' => $paslon->nama_paslon,
                          'nm_partai' => $paslon->nama_partai,
                      ]);
