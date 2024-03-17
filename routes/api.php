@@ -83,6 +83,14 @@ Route::put('/rekap-dengi', [RekapDapil1Controller::class, 'rekapDengi'])->middle
 Route::apiResource('duini', \App\Http\Controllers\Api\dapil1\PaslonDuiniController::class)->middleware('auth:sanctum');
 Route::put('/updateduini', [UpdateDesaDapil1Controller::class, 'updateduini'])->middleware('auth:sanctum');
 Route::put('/rekap-duini', [RekapDapil1Controller::class, 'rekapDuini'])->middleware('auth:sanctum');
+//Desa Komus Satu - PINOGALUMAN
+Route::apiResource('komussatu', \App\Http\Controllers\Api\dapil1\PaslonKomussatuController::class)->middleware('auth:sanctum');
+Route::put('/updatekomussatu', [UpdateDesaDapil1Controller::class, 'updatekomussatu'])->middleware('auth:sanctum');
+Route::put('/rekap-komussatu', [RekapDapil1Controller::class, 'rekapKomussatu'])->middleware('auth:sanctum');
+//Desa Padango - PINOGALUMAN
+Route::apiResource('padango', \App\Http\Controllers\Api\dapil1\PaslonPadangoController::class)->middleware('auth:sanctum');
+Route::put('/updatepadango', [UpdateDesaDapil1Controller::class, 'updatepadango'])->middleware('auth:sanctum');
+Route::put('/rekap-padango', [RekapDapil1Controller::class, 'rekapPadango'])->middleware('auth:sanctum');
 //Desa Bigo - KAIDIPANG
 Route::apiResource('bigo', \App\Http\Controllers\Api\dapil1\PaslonBigoController::class)->middleware('auth:sanctum');
 Route::put('/updatebigo', [UpdateDesaDapil1Controller::class, 'updatebigo'])->middleware('auth:sanctum');

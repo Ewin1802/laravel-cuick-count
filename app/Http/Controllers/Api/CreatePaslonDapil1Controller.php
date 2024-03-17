@@ -12,6 +12,8 @@ use App\Models\Pinogaluman\Ds1_Dalapulibarat;
 use App\Models\Pinogaluman\Ds1_Dalapulitimur;
 use App\Models\Pinogaluman\Ds1_Dengi;
 use App\Models\Pinogaluman\Ds1_Duini;
+use App\Models\Pinogaluman\Ds1_Komussatu;
+use App\Models\Pinogaluman\Ds1_Padango;
 use App\Models\Kaidipang\Ds1_Bigo;
 
 class CreatePaslonDapil1Controller extends Controller
@@ -67,6 +69,8 @@ class CreatePaslonDapil1Controller extends Controller
          $dalapulitimurs = Ds1_Dalapulitimur::inRandomOrder()->get();
          $dengis = Ds1_Dengi::inRandomOrder()->get();
          $duinis = Ds1_Duini::inRandomOrder()->get();
+         $komussatus = Ds1_Komussatu::inRandomOrder()->get();
+         $padangos = Ds1_Padango::inRandomOrder()->get();
          $bigos = Ds1_Bigo::inRandomOrder()->get();
 
          $count_paslons = count($paslons);
@@ -78,10 +82,12 @@ class CreatePaslonDapil1Controller extends Controller
          $count_dalapulitimurs = count($dalapulitimurs);
          $count_dengis = count($dengis);
          $count_duinis = count($duinis);
+         $count_komussatus = count($komussatus);
+         $count_padangos = count($padangos);
          $count_bigos = count($bigos);
 
         $counts = min($count_kayuogus, $count_bigos, $count_batubantayos, $count_dalapulis, $count_dalapulibarats,
-        $count_dalapulitimurs, $count_dengis, $count_duinis);
+        $count_dalapulitimurs, $count_dengis, $count_duinis, $count_komussatus,$count_padangos);
 
 
          if ($counts === 0) {
@@ -134,6 +140,20 @@ class CreatePaslonDapil1Controller extends Controller
                  $existingDuini = Ds1_Duini::where('nm_caleg', $paslon->nama_paslon)->first();
                  if (!$existingDuini) {
                     Ds1_Duini::create([
+                         'nm_caleg' => $paslon->nama_paslon,
+                         'nm_partai' => $paslon->nama_partai,
+                     ]);
+                 }
+                 $existingKomus1 = Ds1_Komussatu::where('nm_caleg', $paslon->nama_paslon)->first();
+                 if (!$existingKomus1) {
+                    Ds1_Komussatu::create([
+                         'nm_caleg' => $paslon->nama_paslon,
+                         'nm_partai' => $paslon->nama_partai,
+                     ]);
+                 }
+                 $existingPadango = Ds1_Padango::where('nm_caleg', $paslon->nama_paslon)->first();
+                 if (!$existingPadango) {
+                    Ds1_Padango::create([
                          'nm_caleg' => $paslon->nama_paslon,
                          'nm_partai' => $paslon->nama_partai,
                      ]);
