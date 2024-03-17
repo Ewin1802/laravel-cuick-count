@@ -10,6 +10,8 @@ use App\Models\Pinogaluman\Ds1_BatuBantayo;
 use App\Models\Pinogaluman\Ds1_Dalapuli;
 use App\Models\Pinogaluman\Ds1_Dalapulibarat;
 use App\Models\Pinogaluman\Ds1_Dalapulitimur;
+use App\Models\Pinogaluman\Ds1_Dengi;
+use App\Models\Pinogaluman\Ds1_Duini;
 use App\Models\Kaidipang\Ds1_Bigo;
 
 class CreatePaslonDapil1Controller extends Controller
@@ -63,6 +65,8 @@ class CreatePaslonDapil1Controller extends Controller
          $dalapulis = Ds1_Dalapuli::inRandomOrder()->get();
          $dalapulibarats = Ds1_Dalapulibarat::inRandomOrder()->get();
          $dalapulitimurs = Ds1_Dalapulitimur::inRandomOrder()->get();
+         $dengis = Ds1_Dengi::inRandomOrder()->get();
+         $duinis = Ds1_Duini::inRandomOrder()->get();
          $bigos = Ds1_Bigo::inRandomOrder()->get();
 
          $count_paslons = count($paslons);
@@ -72,9 +76,12 @@ class CreatePaslonDapil1Controller extends Controller
          $count_dalapulis = count($dalapulis);
          $count_dalapulibarats = count($dalapulibarats);
          $count_dalapulitimurs = count($dalapulitimurs);
+         $count_dengis = count($dengis);
+         $count_duinis = count($duinis);
          $count_bigos = count($bigos);
 
-        $counts = min($count_kayuogus, $count_bigos, $count_batubantayos, $count_dalapulis, $count_dalapulibarats, $count_dalapulitimurs);
+        $counts = min($count_kayuogus, $count_bigos, $count_batubantayos, $count_dalapulis, $count_dalapulibarats,
+        $count_dalapulitimurs, $count_dengis, $count_duinis);
 
 
          if ($counts === 0) {
@@ -89,7 +96,6 @@ class CreatePaslonDapil1Controller extends Controller
                          'nm_partai' => $paslon->nama_partai,
                      ]);
                  }
-
                  $existingBatuBantayo = Ds1_BatuBantayo::where('nm_caleg', $paslon->nama_paslon)->first();
                  if (!$existingBatuBantayo) {
                     Ds1_BatuBantayo::create([
@@ -97,7 +103,6 @@ class CreatePaslonDapil1Controller extends Controller
                          'nm_partai' => $paslon->nama_partai,
                      ]);
                  }
-
                  $existingDalapuli = Ds1_Dalapuli::where('nm_caleg', $paslon->nama_paslon)->first();
                  if (!$existingDalapuli) {
                     Ds1_Dalapuli::create([
@@ -105,7 +110,6 @@ class CreatePaslonDapil1Controller extends Controller
                          'nm_partai' => $paslon->nama_partai,
                      ]);
                  }
-
                  $existingDalapulibarat = Ds1_Dalapulibarat::where('nm_caleg', $paslon->nama_paslon)->first();
                  if (!$existingDalapulibarat) {
                     Ds1_Dalapulibarat::create([
@@ -113,10 +117,23 @@ class CreatePaslonDapil1Controller extends Controller
                          'nm_partai' => $paslon->nama_partai,
                      ]);
                  }
-
                  $existingDalapulitimur = Ds1_Dalapulitimur::where('nm_caleg', $paslon->nama_paslon)->first();
                  if (!$existingDalapulitimur) {
                     Ds1_Dalapulitimur::create([
+                         'nm_caleg' => $paslon->nama_paslon,
+                         'nm_partai' => $paslon->nama_partai,
+                     ]);
+                 }
+                 $existingDengi = Ds1_Dengi::where('nm_caleg', $paslon->nama_paslon)->first();
+                 if (!$existingDengi) {
+                    Ds1_Dengi::create([
+                         'nm_caleg' => $paslon->nama_paslon,
+                         'nm_partai' => $paslon->nama_partai,
+                     ]);
+                 }
+                 $existingDuini = Ds1_Duini::where('nm_caleg', $paslon->nama_paslon)->first();
+                 if (!$existingDuini) {
+                    Ds1_Duini::create([
                          'nm_caleg' => $paslon->nama_paslon,
                          'nm_partai' => $paslon->nama_partai,
                      ]);
