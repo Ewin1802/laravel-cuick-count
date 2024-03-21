@@ -91,6 +91,14 @@ Route::put('/rekap-komussatu', [RekapDapil1Controller::class, 'rekapKomussatu'])
 Route::apiResource('padango', \App\Http\Controllers\Api\dapil1\PaslonPadangoController::class)->middleware('auth:sanctum');
 Route::put('/updatepadango', [UpdateDesaDapil1Controller::class, 'updatepadango'])->middleware('auth:sanctum');
 Route::put('/rekap-padango', [RekapDapil1Controller::class, 'rekapPadango'])->middleware('auth:sanctum');
+//Desa Tanjung Sidupa - PINOGALUMAN
+Route::apiResource('tanjungsidupa', \App\Http\Controllers\Api\dapil1\PaslonTanjungsidupaController::class)->middleware('auth:sanctum');
+Route::put('/updatetanjungsidupa', [UpdateDesaDapil1Controller::class, 'updatetanjungsidupa'])->middleware('auth:sanctum');
+Route::put('/rekap-tanjungsidupa', [RekapDapil1Controller::class, 'rekapTanjungsidupa'])->middleware('auth:sanctum');
+//Desa Tombulang Pantai - PINOGALUMAN
+Route::apiResource('tombulangpantai', \App\Http\Controllers\Api\dapil1\PaslonTombulangpantaiController::class)->middleware('auth:sanctum');
+Route::put('/updatetombulangpantai', [UpdateDesaDapil1Controller::class, 'updatetombulangpantai'])->middleware('auth:sanctum');
+Route::put('/rekap-tombulangpantai', [RekapDapil1Controller::class, 'rekapTombulangpantai'])->middleware('auth:sanctum');
 //Desa Bigo - KAIDIPANG
 Route::apiResource('bigo', \App\Http\Controllers\Api\dapil1\PaslonBigoController::class)->middleware('auth:sanctum');
 Route::put('/updatebigo', [UpdateDesaDapil1Controller::class, 'updatebigo'])->middleware('auth:sanctum');
