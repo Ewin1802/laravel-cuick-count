@@ -16,6 +16,8 @@ use App\Models\Pinogaluman\Ds1_Komussatu;
 use App\Models\Pinogaluman\Ds1_Padango;
 use App\Models\Pinogaluman\Ds1_Tanjungsidupa;
 use App\Models\Pinogaluman\Ds1_Tombulangpantai;
+use App\Models\Pinogaluman\Ds1_Tombulangtimur;
+use App\Models\Pinogaluman\Ds1_Tombulang;
 use App\Models\Kaidipang\Ds1_Bigo;
 
 class CreatePaslonDapil1Controller extends Controller
@@ -75,6 +77,8 @@ class CreatePaslonDapil1Controller extends Controller
          $padangos = Ds1_Padango::inRandomOrder()->get();
          $tanjungsidupa = Ds1_Tanjungsidupa::inRandomOrder()->get();
          $tombulangpantai = Ds1_Tombulangpantai::inRandomOrder()->get();
+         $tombulangtimur = Ds1_Tombulangtimur::inRandomOrder()->get();
+         $tombulang = Ds1_Tombulang::inRandomOrder()->get();
          $bigos = Ds1_Bigo::inRandomOrder()->get();
 
          $count_paslons = count($paslons);
@@ -90,11 +94,13 @@ class CreatePaslonDapil1Controller extends Controller
          $count_padangos = count($padangos);
          $count_tjgsidupa = count($tanjungsidupa);
          $count_tombulangpantai = count($tombulangpantai);
+         $count_tombulangtimur = count($tombulangtimur);
+         $count_tombulang = count($tombulang);
          $count_bigos = count($bigos);
 
         $counts = min($count_kayuogus, $count_bigos, $count_batubantayos, $count_dalapulis, $count_dalapulibarats,
-        $count_dalapulitimurs, $count_dengis, $count_duinis, $count_komussatus,$count_padangos,$count_tjgsidupa,
-        $count_tombulangpantai);
+        $count_dalapulitimurs, $count_dengis, $count_duinis, $count_komussatus, $count_padangos, $count_tjgsidupa,
+        $count_tombulangpantai, $count_tombulangtimur, $count_tombulang);
 
 
          if ($counts === 0) {
@@ -175,6 +181,20 @@ class CreatePaslonDapil1Controller extends Controller
                  $existingTombulangpantai = Ds1_Tombulangpantai::where('nm_caleg', $paslon->nama_paslon)->first();
                  if (!$existingTombulangpantai) {
                     Ds1_Tombulangpantai::create([
+                         'nm_caleg' => $paslon->nama_paslon,
+                         'nm_partai' => $paslon->nama_partai,
+                     ]);
+                 }
+                 $existingTombulangtimur = Ds1_Tombulangtimur::where('nm_caleg', $paslon->nama_paslon)->first();
+                 if (!$existingTombulangtimur) {
+                    Ds1_Tombulangtimur::create([
+                         'nm_caleg' => $paslon->nama_paslon,
+                         'nm_partai' => $paslon->nama_partai,
+                     ]);
+                 }
+                 $existingTombulang = Ds1_Tombulang::where('nm_caleg', $paslon->nama_paslon)->first();
+                 if (!$existingTombulang) {
+                    Ds1_Tombulang::create([
                          'nm_caleg' => $paslon->nama_paslon,
                          'nm_partai' => $paslon->nama_partai,
                      ]);
