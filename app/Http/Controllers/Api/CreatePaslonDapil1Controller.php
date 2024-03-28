@@ -24,6 +24,9 @@ use App\Models\Pinogaluman\Ds1_Tuntungtimur;
 use App\Models\Pinogaluman\Ds1_Tontulowutara;
 use App\Models\Pinogaluman\Ds1_Batutajam;
 use App\Models\Pinogaluman\Ds1_Buko;
+use App\Models\Pinogaluman\Ds1_Bukoselatan;
+use App\Models\Pinogaluman\Ds1_Bukoutara;
+use App\Models\Pinogaluman\Ds1_Busato;
 use App\Models\Kaidipang\Ds1_Bigo;
 
 class CreatePaslonDapil1Controller extends Controller
@@ -91,6 +94,9 @@ class CreatePaslonDapil1Controller extends Controller
          $tontulowutara = Ds1_Tontulowutara::inRandomOrder()->get();
          $batutajam = Ds1_Batutajam::inRandomOrder()->get();
          $buko = Ds1_Buko::inRandomOrder()->get();
+         $bukoselatan = Ds1_Bukoselatan::inRandomOrder()->get();
+         $bukoutara = Ds1_Bukoutara::inRandomOrder()->get();
+         $busato = Ds1_Busato::inRandomOrder()->get();
          $bigos = Ds1_Bigo::inRandomOrder()->get();
 
          $count_paslons = count($paslons);
@@ -114,12 +120,15 @@ class CreatePaslonDapil1Controller extends Controller
          $count_tontulowutara = count($tontulowutara);
          $count_batutajam = count($batutajam);
          $count_buko = count($buko);
+         $count_bukoselatan = count($bukoselatan);
+         $count_bukoutara = count($bukoutara);
+         $count_busato = count($busato);
          $count_bigos = count($bigos);
 
         $counts = min($count_kayuogus, $count_bigos, $count_batubantayos, $count_dalapulis, $count_dalapulibarats,
         $count_dalapulitimurs, $count_dengis, $count_duinis, $count_komussatus, $count_padangos, $count_tjgsidupa,
         $count_tombulangpantai, $count_tombulangtimur, $count_tombulang, $count_tuntulow, $count_tuntung, $count_tuntungtimur,
-        $count_tontulowutara, $count_batutajam, $count_buko);
+        $count_tontulowutara, $count_batutajam, $count_buko, $count_bukoselatan, $count_bukoutara, $count_busato);
 
 
          if ($counts === 0) {
@@ -256,6 +265,27 @@ class CreatePaslonDapil1Controller extends Controller
                  $existingBuko = Ds1_Buko::where('nm_caleg', $paslon->nama_paslon)->first();
                  if (!$existingBuko) {
                     Ds1_Buko::create([
+                         'nm_caleg' => $paslon->nama_paslon,
+                         'nm_partai' => $paslon->nama_partai,
+                     ]);
+                 }
+                 $existingBukoselatan = Ds1_Bukoselatan::where('nm_caleg', $paslon->nama_paslon)->first();
+                 if (!$existingBukoselatan) {
+                    Ds1_Bukoselatan::create([
+                         'nm_caleg' => $paslon->nama_paslon,
+                         'nm_partai' => $paslon->nama_partai,
+                     ]);
+                 }
+                 $existingBukoutara = Ds1_Bukoutara::where('nm_caleg', $paslon->nama_paslon)->first();
+                 if (!$existingBukoutara) {
+                    Ds1_Bukoutara::create([
+                         'nm_caleg' => $paslon->nama_paslon,
+                         'nm_partai' => $paslon->nama_partai,
+                     ]);
+                 }
+                 $existingBusato = Ds1_Busato::where('nm_caleg', $paslon->nama_paslon)->first();
+                 if (!$existingBusato) {
+                    Ds1_Busato::create([
                          'nm_caleg' => $paslon->nama_paslon,
                          'nm_partai' => $paslon->nama_partai,
                      ]);
